@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Erreur paiement{% endblock %}
+{% block description %}
+    <meta name="description" content="Une erreur c'est produite lors de votre paiement" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Erreur de paiement</h1>
+                <p class="message">{{ reservation.client.firstname }},
+                    <br></br>Il semblerait que votre paiement a échoué pour votre réservation <strong>{{ reservation.reference}}</strong>
+                </p>
+                <form action="{{ path('reservation.recap') }}" method="POST">
+                    <div class="form-group">
+                        <button class="btn_secondary full" type="submit">Réessayer le paiement</button>
+                    </div>
+                    <input type="hidden" name="token" value="{{ csrf_token('reservation') }}"/>
+                </form>
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

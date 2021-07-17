@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable{% endblock %}
+{% block description %}
+    <meta name="description" content="Page d'erreur de Luxspace"/>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Oups !</h1>
+                <p class="subtitle"><span>La page que vous recherchez semble introuvable</p></span>
+                <div class="flex_center">
+                    <a class="btn_secondary" href="{{ path('home') }}">Revenir à la page d'accueil</a>
+                    <a class="btn_secondary" href="{{ path('destination.index') }}">Découvrir les destinations</a>
+                </div>            
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

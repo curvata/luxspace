@@ -1,0 +1,91 @@
+.search_flights {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      .lists {
+        display: flex;
+        justify-content: center;
+        margin: 1rem;
+
+        .list {
+          min-width: calc(50% - 2rem);
+          margin: 1rem;
+
+          tr {
+            &:hover {
+              background-color: rgba(175, 219, 255, 0.3);
+              cursor: pointer;
+            }
+          }
+
+          &_info {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--red);
+          }
+
+          &_hour {
+            font-size: 0.8rem;
+            color: var(--blue);
+          }
+
+          &_seat {
+            font-size: 0.8rem;
+            color: var(--blue);
+          }
+
+          &_rocket_name {
+            font-weight: bold;
+          }
+
+          &_time {
+            font-size: 1.2rem
+          }
+
+          &_ico {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                max-height: 2rem;
+                max-width: 2rem;
+                margin: 5px;
+            }
+          }
+        }
+      }
+    }
+    button {
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+      margin-top: 2rem;
+    }
+}
+
+
+@media screen and (max-width: 1300px) {
+  .search_flights {
+    button {
+      width: calc(100% - 1rem);
+    }
+    .content {
+      .lists {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+
+        .list {
+          min-width: 100%;
+        }
+      }
+    }
+  }
+}

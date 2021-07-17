@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Récapitulatif de votre réservation{% endblock %}
+{% block description %}
+    <meta name="description" content="Détails de votre réservation pour l'espace" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    {{ encore_entry_script_tags('checkout') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <h1 class="htitle_center">Récapitulatif de votre réservation pour 
+            {% if reservation.departure.destination.title == 'Lune' %}la {% endif %}{{ reservation.departure.destination.title }}
+        </h1>
+        <p class="subtitle"><span>{{ reservation.departure.destination.shortDescription }}</span></p>
+        <div class="recap_content">
+            <section class="flights">
+                    <article class="flight">
+                        <div class="ico"><img src="{{ asset('./images/icons/departure.png') }}" alt="Icône d'une fusée qui décolle"></img><h2>Vol aller</h2></div>
+                        <div class="card">
+                            <div class="card_image">
+                                <img src="{{ asset('images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{ reservation.departure.destination.title }}">
+                            </div>
+                            <div class="card_title">
+                                <h3>LUXEMBOURG <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png') }}" alt="Icône d'une fusée"></img> {{ reservation.departure.destination|upper }}</h3>
+                            </div>
+                            <div class="card_content">
+                                {{ include ("reservation/parts/departure.html.twig", {'departure': reservation.departure}) }}
+                            </div>
+                        </div>
+                    </article>
+                    <article class="flight">
+                        <div class="ico"><img src="{{ asset('./images/icons/returned.png') }}" alt="Icône d'une fusée qui retourne atterit"></img><h2>Vol retour</h2></div>
+                        <div class="card">
+                            <div class="card_image">
+                                <img src="{{ asset('images/location/' ~ reservation.returned.ffrom.pictureHeader) }}" alt="{{ reservation.returned.ffrom.title }}">
+                            </div>
+                            <div class="card_title">
+                                <h3>{{ reservation.returned.ffrom|upper }} <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png') }}" alt="Icône d'une fusée"></img> LUXEMBOURG</h3>
+                            </div>
+                            <div class="card_content">
+                                {{ include ("reservation/parts/return.html.twig", {'return': reservation.returned}) }}
+                            </div>
+                        </div>
+                    </article>
+            </section>
+            <section class="summary_reservation">
+                <div class="ico"><img src="{{ asset('./images/icons/details.png')}}"></img><h2>Détails</h2></div>
+                <div class="item">
+                    {% include "reservation/parts/price.html.twig" %}
+                    <div class="form-group">
+                        <a id="checkout-button" data-reference="{{reservation.id}}" class="btn_save full">Payer</a>
+                        <p>&#10075; Pour procéder à un paiement, vous pouvez utiliser les données suivantes: "4242 4242 4242 4242", 3 chiffres aléatoires pour le CVC et une date dans le futur. &#10076;</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Vols de retours{% endblock %}
+{% block description %}
+    <meta name="description" content="Index des vols de retours" />
+{% endblock %}
+
+{% block adminContent %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/returned.png')}}" alt="Icône d'une fusée qui attérit"></img>
+    <h1>Vols de retours ({{ returneds.totalItemCount }})</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Référence</th>
+            <th>Provenance</th>
+            <th>Date de départ</th>
+            <th>Nombre de places</th>
+            <th>Nom de la fusée</th>
+            <th>Durée de vol</th>
+            <th>Prix pour une personne</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for returned in returneds %}
+        <tr>
+            <td>{{ returned.id }}</td>
+            <td>{{ returned.reference }}</td>
+            <td>{{ returned.ffrom }}</td>
+            <td>{{ returned.date ? returned.date|date('d-m-Y H:i:s') : '' }}</td>
+            <td>{{ returned.seat }}</td>
+            <td>{{ returned.rocket }}</td>
+            <td>{{ returned.duration }}</td>
+            <td>{{ returned.price }}</td>
+            <td>
+                <a class="btn_secondary" href="{{ path('returned.show', {'id': returned.id}) }}">Voir</a>
+                <a class="btn_edit" href="{{ path('returned.edit', {'id': returned.id}) }}">Editer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(returneds) }}
+<div class="flex">
+    <a class="btn_secondary"href="{{ path('returned.new') }}">Créer</a>
+</div>
+{% endblock %}

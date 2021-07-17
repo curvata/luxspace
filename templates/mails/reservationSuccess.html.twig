@@ -1,0 +1,11 @@
+{% extends 'mails/mail.html.twig' %}
+
+{% block body %}
+Bonjour {{ content.client.lastname }} {{ content.client.firstname }},<br></br>
+Nous vous remercions pour votre commande n° <strong>{{ content.reference }}</strong> 
+et nous vous souhaitons d'ores et déjà un bon voyage vers {% if content.departure.destination.title == "Lune" %}la {% endif %}
+<strong>{{ content.departure.destination.title }}</strong>.<br></br>
+<a class="btn_primary" href="{{ url('account.index') }}">Accéder à mon compte</a> |
+<a class="btn_primary" href="{{ url('account.reservations.incoice', {'id': content.id }) }}">Voir ma facture</a>
+<img src="{{ absolute_url(asset('images/logo.png')) }}">
+{% endblock %}

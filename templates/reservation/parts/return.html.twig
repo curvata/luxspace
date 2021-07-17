@@ -1,0 +1,28 @@
+<table>
+    <tbody>
+        <tr>
+            <td>Référence:</td>
+            <td>{{ return.reference }}</td>
+        </tr>
+        <tr>
+            <td>Fusée:</td>
+            <td>{{ return.rocket }}</td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>{{ return.date|date('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <td>Heure:</td>
+            <td>{{ return.date|date('H:i:s') }}</td>
+        </tr>
+         <tr>
+            <td>Durée:</td>
+            <td>{{ return.duration }} heures</td>
+        </tr>
+        <tr>
+            <td>Prix:</td>
+            <td><span class="price">{{ return.price|number_format(2, '.', ',') }} €</span></td>
+        </tr>
+    </tbody>
+</table>

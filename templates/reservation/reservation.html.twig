@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Réservation des vols{% endblock %}
+{% block description %}
+    <meta name="description" content="Récapitulatif des vols et encodage des passagers" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <h1 class="htitle_center">Réservation pour 
+            {% if departure.destination.title == 'Lune' %}la {% endif %}{{ departure.destination.title }}
+        </h1>
+        <p class="subtitle"><span>{{ departure.destination.shortDescription }}</span></p>
+        <section class="flights">
+                <article class="flight">
+                    <div class="ico"><img src="{{ asset('./images/icons/departure.png')}}" alt="Icône d'une fusée qui décolle"></img><h2>Vol aller</h2></div>
+                    <div class="card">
+                        <div class="card_image">
+                            <img src="{{ asset('images/location/' ~ departure.destination.pictureHeader) }}" alt="{{ departure.destination.title }}">
+                        </div>
+                        <div class="card_title">
+                            <h3>LUXEMBOURG <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png')}}" alt="Icône d'une fusée"></img> {{ departure.destination|upper }}</h3>
+                        </div>
+                        <div class="card_content">
+                            {% include "reservation/parts/departure.html.twig" %}
+                        </div>
+                    </div>
+                </article>
+                <article class="flight">
+                    <div class="ico"><img src="{{ asset('./images/icons/returned.png')}}" alt="Icône d'une fusée qui retourne atterit"></img><h2>Vol retour</h2></div>
+                    <div class="card">
+                        <div class="card_image">
+                            <img src="{{ asset('images/location/' ~ return.ffrom.pictureHeader) }}" alt="{{ return.ffrom.title }}">
+                        </div>
+                        <div class="card_title">
+                            <h3>{{ return.ffrom|upper }} <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png')}}"></img> LUXEMBOURG</h3>
+                        </div>
+                        <div class="card_content">
+                            {% include "reservation/parts/return.html.twig" %}
+                        </div>
+                    </div>
+                </article>
+        </section>
+        <section class="passengers">
+         {% for message in app.flashes('errorPassager') %}
+                <div class="alert_danger">{{message}}</div>
+            {% endfor %}
+            <div class="ico"><img src="{{ asset('./images/icons/passenger.png')}}"></img><h2>Passagers</h2></div>
+                <form action="{{ path('reservation.recap') }}" method="POST">
+                    <div class="fields">
+                        {% for i in 1.. passengers %}
+                            <div class="passenger">
+                                <div class="ico"><img src="{{ asset('./images/icons/user.png') }}" alt="Icône utilisateur"></img><h3>Passager numéro {{ i }}</h3></div>
+                                <div class="form-group">
+                                    <input id="passenger_{{ i }}_firstname"type="text" name="passengers[{{ i }}][firstname]" placeholder="Nom" required></input>
+                                </div>
+                                <div class="form-group">
+                                    <input id="passenger_{{ i }}_lastname"type="text" name="passengers[{{ i }}][lastname]" placeholder="Prénom" required></input>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    <div class="flex_between">
+                        <a class="btn_back" href="{{ app.request.server.get('HTTP_REFERER') }}">Retour</a>
+                        <button class="btn_save" type="submit">Confirmer ma réservation</button>
+                    </div>
+                    <input type="hidden" name="token" value="{{ csrf_token('reservation') }}"/>
+                    <input type="hidden" name="departure" value="{{ departure.id }}">
+                    <input type="hidden" name="return" value="{{ return.id }}">
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'account/index.html.twig' %}
+
+{% block title %}LUXSPACE - Editer vos cordonnées{% endblock %}
+{% block description %}
+    <meta name="description" content="Editer les cordonnées de votre compte" />
+{% endblock %}
+{% block title_cat %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/user.png') }}" alt="Icône d'un utilisateur"></img>
+    <h1>Modifier mes cordonnées</h1>
+</div>
+{% endblock %}   
+
+{% block accountContent %}
+{{ form_start(form) }}
+    <div class="flex">
+        <div class="left_zone">
+            {{ form_row(form.firstname) }}   
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.phone) }}  
+        </div>
+        <div class="right_zone">
+            {{ form_row(form.address) }}
+            {{ form_row(form.postalCode) }}
+            {{ form_row(form.city) }} 
+            {{ form_row(form.country) }}
+        </div>
+            {{ form_rest(form) }}
+    </div>
+    <div class="flex_between">
+        <a class="btn_back" href="{{ path('account.profil') }}">Retour</a>
+        <button class="btn_save">{{ button_label|default('Sauvegarder') }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

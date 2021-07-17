@@ -1,0 +1,7 @@
+framework:
+    test: true
+    secret: '%env(STRIPE_PRIVATE)%'
+
+    session:
+        storage_id: session.storage.mock_file
+    

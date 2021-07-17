@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <header style="padding: 15px; background-color: black; margin-bottom: 50px;">
+        <div style="display: flex; align-items: center;">
+            <img width="30px" style="margin-right: 10px" src="{{ absolute_url(asset('./images/logo_s.png')) }}"></img>
+            <img width="150px" src="{{ absolute_url(asset('./images/logo.png')) }}"></img>
+        </div>
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>

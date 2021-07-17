@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Connexion{% endblock %}
+{% block description %}
+    <meta name="description" content="Se connecter avec mes identifiants" />
+{% endblock %}
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Se connecter</h1>
+                <p class="subtitle"><span>Merci de renseigner vos identifiants<span></p>
+                {% if error %}
+                    <div class="alert_danger">
+                        {{ error.messageKey | trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+                <form method="POST">
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-field" placeholder="Adresse e-mail">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-field" type="password" id="password" name="password" placeholder="Mot de passe">
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="form-group">
+                        <button class="btn_secondary full" type="submit">Connexion</button>
+                    </div>
+                </form>  
+                <div class="after_login">
+                    <a href="{{ path('password.recovery.index') }}">Mot de passe oublié ?</a>
+                    <a href="{{ path('register') }}">Créer un compte</a>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

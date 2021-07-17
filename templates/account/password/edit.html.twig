@@ -1,0 +1,22 @@
+{% extends 'account/index.html.twig' %}
+
+{% block title %}LUXSPACE - Editer votre mot de passe{% endblock %}
+{% block description %}
+    <meta name="description" content="Modifier le mot de passe de votre compte" />
+{% endblock %}
+{% block title_cat %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/password.png') }}" alt="Icône d'un cadenas"></img>
+    <h1>Modifier mon mot de passe</h1>
+</div>
+{% endblock %} 
+
+{% block accountContent %} 
+{{ form_start(form) }}
+    {{ form_row(form.password) }}
+    <div class="flex_between">
+        <a class="btn_back"href="{{ path('account.index') }}">Retour</a>
+        <button class="btn_save" type="submit">Sauvegarder</button>
+    </div>
+{{ form_end(form) }}
+{% endblock %}

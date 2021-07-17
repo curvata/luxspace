@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+<div class="flex">
+   <div class="left_zone">
+       {{ form_row(form.reference) }}
+       {{ form_row(form.ffrom) }}
+       {{ form_row(form.date) }}
+   </div>
+   <div class="right_zone">
+       {{ form_row(form.seat) }}
+       {{ form_row(form.rocket) }}
+       {{ form_row(form.duration) }}
+       {{ form_row(form.price) }}
+   </div>
+</div>
+{{ form_rest(form) }}
+<div class="flex_between">
+    <a class="btn_back"href="{{ path('returned.index') }}">Retour</a>
+    <div class="flex">
+        <button class="btn_save">{{ button_label|default('Sauvegarder') }}</button>
+        {{ form_end(form) }}
+        {% if returned.id %}
+            {{ include('admin/returned/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>

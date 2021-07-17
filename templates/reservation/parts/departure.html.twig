@@ -1,0 +1,28 @@
+<table>
+    <tbody>
+        <tr>
+            <td>Référence:</td>
+            <td>{{ departure.reference }}</td>
+        </tr>
+        <tr>
+            <td>Fusée:</td>
+            <td>{{ departure.rocket }}</td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>{{ departure.date|date('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <td>Heure:</td>
+            <td>{{ departure.date|date('h:i:s') }}</td>
+        </tr>
+         <tr>
+            <td>Durée:</td>
+            <td>{{ departure.duration }} heures</td>
+        </tr>
+        <tr>
+            <td>Prix:</td>
+            <td><span class="price">{{ departure.price|number_format(2, '.', ',') }} €</span></td>
+        </tr>
+    </tbody>
+</table>

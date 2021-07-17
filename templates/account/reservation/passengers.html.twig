@@ -1,0 +1,41 @@
+{% extends 'account/index.html.twig' %}
+
+{% block title %}LUXSPACE - Gérer les passagers{% endblock %}
+{% block description %}
+    <meta name="description" content="Modifier les passagers de ma réservation" />
+{% endblock %}
+{% block title_cat %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/passenger.png')}}" alt="Icône de passagers"></img>
+    <h1>Les passagers</h1>
+</div>
+{% endblock %}
+{% block accountContent %}
+
+{% for message in app.flashes('errorPassager') %}
+    <div class="alert_danger">{{message}}</div>
+{% endfor %}
+<section class="passengers">
+       <form action="{{ path('account.reservations.passengers', {'id': reservation.id }) }}" method="POST">
+           <div class="fields">
+               {% for key, passenger in reservation.passengers %}
+                   <div class="passenger">
+                       <div class="ico"><img src="{{ asset('./images/icons/user.png')}}" alt="Icône d'un utilisateur"></img><h4>Passager numéro {{ key +1 }}</h4></div>
+                       <div class="form-group">
+                           <input id="{{ passenger.id }}_firstname"type="text" name="passengers[{{ passenger.id }}][firstname]" value="{{ passenger.firstname }}" placeholder="Nom" required></input>
+                       </div>
+                       <div class="form-group">
+                           <input id="{{ passenger.id }}_lastname"type="text" name="passengers[{{ passenger.id }}][lastname]" value="{{ passenger.lastname }}" placeholder="Prénom" required></input>
+                       </div>
+                   </div>
+               {% endfor %}
+               </div>
+            <div class="flex_between">
+                <a class="btn_back"href="{{ path('account.reservations') }}">Retour</a>
+                <button type="submit" class="btn_save" href="">Sauvegarder</button>
+            </div>
+           <input type="hidden" name="token" value="{{ csrf_token('passengers') }}"/>
+       </form>
+   </div>
+</section>
+{% endblock %}

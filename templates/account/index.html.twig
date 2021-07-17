@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Tableau de bord de votre compte{% endblock %}
+{% block description %}
+    <meta name="description" content="Tableau de bord de votre compte client" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        {% block title_cat %}
+        <div class="ico">
+            <img src="{{ asset('./images/icons/user.png')}}" alt="Icône d'un utilisateur"></img>
+            <h1>Tableau de bord</h1>
+        </div>
+        {% endblock %}
+        <section class="account">
+            {% block accountContent %}
+                <h2>Bonjour {{ app.user.firstname }},</h2><br>
+                <p>À partir du tableau de bord de votre compte, vous pouvez gérer vos réservations, 
+                changer votre mot de passe et les détails de votre compte.</p>
+                <div class="summary">
+                    {% if nextDeparture is not null %}
+                        <div class="ico">
+                            <img src="{{ asset('./images/icons/rocket.png')}}" alt="Icône d'une fusée qui décolle"></img>
+                            {% if nextDeparture.date.days == 0 %}
+                                <p>C'est le grand jour, vous décollez pour {% if  nextDeparture.reservation.departure.destination.title == "Lune" %} la {% endif %}
+                                    {{nextDeparture.reservation.departure.destination.title}}
+                                </p>
+                            {% else %}
+                                <p>
+                                    Vous décollez dans {{ nextDeparture.date.days }} jour{% if nextDeparture.date.days > 1 %}s{% endif %} 
+                                    pour {% if  nextDeparture.reservation.departure.destination.title == "Lune" %} la {% endif %}
+                                    {{nextDeparture.reservation.departure.destination.title}}
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="flex_center">
+                        <a class="btn_secondary" href="{{ path('account.profil') }}">Gérer mes cordonnées</a>
+                        <a class="btn_secondary" href="{{ path('account.profil.password') }}">Modifier mon mot de passe</a>
+                        <a class="btn_secondary" href="{{ path('account.reservations') }}">Gérer mes réservations</a>
+                    </div>
+                </div>
+            {% endblock %}
+        </section>
+    </main>
+</div>
+{% endblock %}

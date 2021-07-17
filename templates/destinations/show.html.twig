@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Destination {{ destination.title }}{% endblock %}
+{% block description %}<meta name="description" content="Présentation de la destination {{ destination.title }}" />{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+    {{ encore_entry_script_tags('splidejs') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <section class="product_show">
+            <div class="product_pictures">
+                <div class="splide splide_f">
+	                <div class="splide__track">
+	                	<ul class="splide__list">
+                            {% for picture in destination.pictures %}
+	                		    <li class="splide__slide"><img src="{{ asset('images/location/' ~ picture ) }}" alt="image de {{ destination.title }}"></img></li>
+                            {% endfor %}
+	                	</ul>
+	                </div>
+                </div>
+            </div>
+            <article class="details">
+                <div class="content">
+                    <h1 class="content_title">{{ destination.title }}</h1>
+                    <p class="content_description">{{ destination.description }}</p>
+                </div>
+                <div class="mini_search">
+                    {% include "./destinations/parts/search.html.twig" %}
+                </div>
+            </article>
+        </section>
+        {% if destinations %}
+            <section class="selection_products">
+                <h2 class="htitle_center">VOUS AIMEREZ</h2>
+                <p class="subtitle"><span>Des destinations incroyables</span></p>
+                <div class="items">
+                    {% for destination in destinations %}
+                        {% include "./destinations/parts/product.html.twig" %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}

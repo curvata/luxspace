@@ -1,0 +1,52 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Réservations{% endblock %}
+{% block description %}
+    <meta name="description" content="Index des réservations" />
+{% endblock %}
+
+{% block adminContent %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/calendar.png')}}"></img>
+        <h1>Réservations ({{ reservations.totalItemCount }})</h1>
+    </div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Status</th>
+            <th>Nom client</th>
+            <th>Date de création</th>
+            <th>Référence vol départ</th>
+            <th>Référence vol retour</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>
+                <span class="{% if reservation.status == "Payé" %}status_pay{% else %}status_refund{% endif %}">{{ reservation.status }}</span>
+            </td>
+            <td>{{ reservation.client.lastname }}</td>
+            <td>{{ reservation.createAt ? reservation.createAt|date('d-m-Y') : '' }}</td>
+            <td>{{ reservation.departure.reference }}</td>
+            <td>{{ reservation.returned.reference }}</td>
+            <td>
+                <a class="btn_secondary" href="{{ path('reservation.show', {'id': reservation.id}) }}">Voir</a>
+                <a class="btn_edit" href="{{ path('reservation.edit', {'id': reservation.id}) }}">Editer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(reservations) }}
+<div class="flex">
+    <a class="btn_secondary"href="{{ path('reservation.new') }}">Créer</a>
+</div>
+{% endblock %}

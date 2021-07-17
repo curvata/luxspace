@@ -1,0 +1,11 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Créer une réservation{% endblock %}
+{% block description %}
+    <meta name="description" content="Créer une nouvelle réservation" />
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Créer une réservation</h1>
+    {{ include('admin/reservation/_form.html.twig') }}
+{% endblock %}

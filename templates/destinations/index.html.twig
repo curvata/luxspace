@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Desinations{% endblock %}
+{% block description %}<meta name="description" content="Liste de nos destinations"/>{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <section class="selection_products">
+            <h1 class="htitle_center">NOS DESTINATIONS</h1>
+            <p class="subtitle"><span>Explorez la galaxie</span></p>
+            <div class="items">
+                {% for destination in destinations %}
+                    {% include "./destinations/parts/product.html.twig" %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}

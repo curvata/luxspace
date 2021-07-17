@@ -1,0 +1,151 @@
+body {
+    background-color: var(--grey);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+a {
+    color: var(--text);
+    font-size: 1.2rem;
+
+    &:hover {
+        color: var(--blue-hover);
+    }
+}
+
+input, select{ font-size: 1.4rem; }
+h1 { font-size: 2.5rem;}
+h2 { font-size: 2rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 0.8rem; }
+h6 { font-size: 0.5rem; }
+p { font-size: 1.2rem; font-weight: 300; }
+
+.price {
+    color: #eb4d4b;
+    font-size: 1.2rem;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.htitle {
+    &_center {
+        @extend .htitle;
+        text-align: center;
+    }
+}
+
+.htitle + .message {
+    margin-top: 2rem;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: center;
+
+    span {
+        text-align: center;
+        width: 70%; 
+    }
+}
+
+section + article, 
+.subtitle + section , 
+.subtitle + .items , 
+.subtitle + .recap_content{
+    margin-top: var(--margin-content);
+}
+
+.ico {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        max-height: 2rem;
+        max-width: 2rem;
+        margin: 5px;
+    }
+}
+
+.ico_booking {
+    width: 25px;
+}
+
+.border_shadow_white{
+    border-radius: var(--br);
+    box-shadow: var(--shadow);
+    background-color: white;
+}
+
+.header_section {
+    height: 30vh;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.pictures {
+    margin-bottom: 1rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+
+    span {
+        margin: 0.5rem;
+        color: white;
+        border-radius: var(--br);
+        background-color: var(--blue);
+
+        a {
+            padding: 0.6rem;
+            display: block;
+            font-size: 1rem;
+            color: inherit;
+            width: 100%;
+        }
+    }
+
+    .current {
+        padding: 0.8rem;
+        font-size: 1.2rem;
+        border-radius: var(--br);
+        background-color: var(--red);
+    }
+}
+
+select option[value=""] {
+    color: #999999;
+  }
+
+@media screen and (max-width: 700px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    a {
+        font-size: 1rem;
+    }
+
+    .subtitle span {
+        width: 100%;
+    }
+}

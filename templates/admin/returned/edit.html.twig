@@ -1,0 +1,10 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Editer un vol de retour{% endblock %}
+{% block description %}
+    <meta name="description" content="Modifier le vol de retour {{ returned.reference }}" />
+{% endblock %}
+{% block adminContent %}
+    <h1 class="htitle">Editer le retour ({{ returned.reference }})</h1>
+    {{ include('admin/returned/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+{% endblock %}

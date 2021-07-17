@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Créer un compte{% endblock %}
+{% block description %}
+            <meta name="description" content="Créer un compte client sur Luxspace" />
+        {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Créer un compte</h1>
+                <p class="subtitle"><span>Merci de renseigner les différents champs</p></span>
+                {{ form_start(form) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.stringBirthday) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.postalCode) }}
+                {{ form_row(form.city) }}
+                {{ form_row(form.country) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
+                <button class="btn_secondary full" type="submit">Créer un compte</button>
+                {{ form_end(form) }}
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

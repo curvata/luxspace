@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}LUXSPACE - Réservation de vols pour l'espace{% endblock %}</title>
+        <link rel="icon" href="{{ asset('./images/favicon.ico') }}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block description %}
+            <meta name="description" content="Réservez vos vols dans l'espace avec Luxspace" />
+        {% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="container">   
+                <nav class="topbar">
+                    <a href="{{ path('home') }}"><img class="topbar_logo" src="{{ asset('./images/logo.png') }}" alt="logo de Luxspace"></img></a>
+                    <ul class="topbar_menu">
+                        <li><a class="menu_link {{ isActive('destination')? 'active' }}" href="{{ path('destination.index') }}">DESTINATIONS</a></li>
+                        <li><a class="menu_link {{ isActive('contact')? 'active' }}" href="{{ path('contact') }}">CONTACT</a></li>
+                        {% if app.user %}
+                            <li><a class="menu_link {{ isActive('compte')? 'active' }}" href="{{ path('account.index') }}">COMPTE &#10072; {{ app.user.firstname}}</a></li>
+                            <li><a class="menu_link" href="{{ path('logout') }}">DECONNEXION</a></li>
+                        {% else %}
+                            <li><a class="menu_link {{ isActive('connexion')? 'active' }}" href="{{ path('login') }}">CONNEXION</a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="topbar_btn_menu_mobile">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        {% block headImage %}{% endblock %}
+        {% block flash %}
+        <div class="container">
+            {% for message in app.flashes('success') %}
+                <div class="alert_success">{{message}}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert_danger">{{message}}</div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+        <footer>
+            <div class="container">
+                <section class="content">
+                    <p><img width="100" src="{{ asset('./images/logo.png') }}"></img> &#10072; <a href="{{ path('about')}}">C'est quoi ?</a> &#10072; Développé par <a href="https://menezes.be">Menezes</a></p>
+                    <div class="social">
+                        <img src="{{ asset('./images/icons/facebook.png')}}"></img>
+                        <img src="{{ asset('./images/icons/instagram.png')}}"></img>
+                        <img src="{{ asset('./images/icons/twitter.png')}}"></img>
+                    </div>
+                </section>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{{ form_start(searchForm, {'action': path('search.flight')}) }}
+<div class="field">
+    {{ form_label(searchForm.destination) }}
+    <div>
+        <img src="{{ asset('./images/icons/rocket.png')}}"></img>
+        {{ form_widget(searchForm.destination) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label(searchForm.departure) }}
+    <div>
+        <img src="{{ asset('./images/icons/calendar.png')}}"></img>
+        {{ form_widget(searchForm.departure) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label(searchForm.returned) }}
+    <div>
+        <img src="{{ asset('./images/icons/calendar.png')}}"></img>
+        {{ form_widget(searchForm.returned) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label(searchForm.passagers) }}
+    <div>
+        <img src="{{ asset('./images/icons/passenger.png')}}"></img>
+        {{ form_widget(searchForm.passagers) }}
+    </div>
+</div>
+<button type="submit" class="btn_primary">RECHERCHE</button>
+{{ form_end(searchForm) }}

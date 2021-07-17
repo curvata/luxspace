@@ -1,0 +1,25 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}LUXSPACE - Administration{% endblock %}
+{% block description %}
+    <meta name="description" content="Tableau de bord de l'administration" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('chartjs') }}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <main>
+        <section class="admin_content">
+            {% block adminContent %}
+            <div class="ico">
+                <img src="{{ asset('./images/icons/admin.png')}}" alt="Icône d'un admin"></img>
+                <h1>Administration</h1>
+            </div> 
+            <canvas id="myChart"></canvas>           
+            {% endblock %}
+        </section>
+    </main>
+</div>
+{% endblock %}

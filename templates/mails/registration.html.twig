@@ -1,0 +1,8 @@
+{% extends 'mails/mail.html.twig' %}
+
+{% block body %}
+<p>Bonjour {{ content.lastname }} {{ content.firstname }},<br></br>
+bienvenue chez Luxspace, découvrez sans plus tarder nos <a href="{{ path('destination.index') }}">destinations incroyables !</a></p><br>
+<a class="btn_primary" href="{{ url('login') }}">Accéder à mon compte</a>
+<img src="{{ absolute_url(asset('images/logo.png')) }}">
+{% endblock %}

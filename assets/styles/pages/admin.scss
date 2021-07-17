@@ -1,0 +1,51 @@
+@use "../app.scss";
+
+.admin_content {
+    padding: var(--padding-content);
+    @extend .border_shadow_white;
+}
+
+.pictures {
+    position: relative;
+    padding: 1rem;
+    background-color: rgb(221, 221, 221);
+    border-radius: var(--br);
+
+    .picture {
+        margin: 5px;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        
+        img {
+            max-width: 130px;
+            max-height: 200px;
+            &:hover {
+                filter: grayscale(1);
+            }
+        }
+    
+        .remove {
+            max-width: 40px;
+            max-height: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 950px) {
+    th {
+      display: none;
+    }
+    td {
+      display: block;
+    }
+  }

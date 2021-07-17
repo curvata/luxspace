@@ -1,0 +1,26 @@
+{{ form_start(formSearch, {'action': path('search.flight')}) }}
+<div class="date">
+    <div class="field">
+        {{ form_label(formSearch.departure) }}
+        <div>
+            <img src="{{ asset('./images/icons/calendar.png')}}"></img>
+            {{ form_widget(formSearch.departure) }}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label(formSearch.returned) }}
+        <div>
+            <img src="{{ asset('./images/icons/calendar.png')}}"></img>
+            {{ form_widget(formSearch.returned) }}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label(formSearch.passagers) }}
+        <div>
+            <img src="{{ asset('./images/icons/passenger.png')}}"></img>
+            {{ form_widget(formSearch.passagers) }}
+        </div>
+    </div>
+</div>
+<button type="submit" class="btn_primary">Recherche</button>
+{{ form_end(formSearch) }}

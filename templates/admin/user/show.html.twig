@@ -1,0 +1,65 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Utilisateur {{ user.id }} {% endblock %}
+{% block description %}
+    <meta name="description" content="Visualiser l'utilisateur {{ user.id }}" />
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Utilisateur ({{ user.lastname }} {{ user.firstname }})</h1>
+    <table class="th-sm">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ user.birthday ? user.birthday|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ user.Address }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ user.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.city }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ user.country }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="flex_between">
+        <a class="btn_back"href="{{ path('user.index') }}">Retour</a>
+        <div class="flex">
+            <a class="btn_edit"href="{{ path('user.edit', {'id': user.id}) }}">Editer</a>
+            {{ include('admin/user/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

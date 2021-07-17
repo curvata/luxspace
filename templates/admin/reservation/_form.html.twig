@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+<div class="flex">
+   <div class="left_zone">
+       {{ form_row(form.reference) }}
+       {{ form_row(form.departure) }}
+       {{ form_row(form.returned) }}
+       {{ form_row(form.status) }}
+   </div>
+
+   <div class="right_zone">
+       {{ form_row(form.client) }}
+       {{ form_row(form.departureprice) }}
+       {{ form_row(form.returnprice) }}
+   </div>
+</div>
+{{ form_rest(form) }}
+<div class="flex_between">
+    <a class="btn_back"href="{{ path('reservation.index') }}">Retour</a>
+    <div class="flex">
+        <button class="btn_save">{{ button_label|default('Créer') }}</button>
+        {{ form_end(form) }}
+        {% if reservation.id %}
+            {{ include('admin/reservation/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>

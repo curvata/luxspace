@@ -1,0 +1,59 @@
+{% extends 'account/index.html.twig' %}
+
+{% block title %}LUXSPACE - Votre profil{% endblock %}
+{% block description %}
+    <meta name="description" content="Visualiser les données de votre compte" />
+{% endblock %}
+{% block title_cat %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/user.png') }}" alt="Icône d'un utilisateur"></img>
+    <h1>Profil</h1>
+</div>
+{% endblock %}     
+
+{% block accountContent %}
+<table class="th-sm">
+    <tbody>
+        <tr>
+            <th>E-mail</th>
+            <td>{{ app.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td>{{ app.user.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ app.user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Date de naissance</th>
+            <td>{{ app.user.birthday ? app.user.birthday|date('d-m-Y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ app.user.Address }}</td>
+        </tr>
+        <tr>
+            <th>Code postal</th>
+            <td>{{ app.user.postalCode }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ app.user.city }}</td>
+        </tr>
+        <tr>
+            <th>Pays</th>
+            <td>{{ app.user.country }}</td>
+        </tr>
+        <tr>
+            <th>Téléphone</th>
+            <td>{{ app.user.phone }}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="flex_between">
+    <a class="btn_back" href="{{ path('account.index') }}">Retour</a>
+    <a class="btn_edit" href="{{ path('account.profil.edit', {'id': app.user.id}) }}">Modifier mes cordonnées</a>
+</div>
+{% endblock %}

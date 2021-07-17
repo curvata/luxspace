@@ -1,0 +1,21 @@
+import './styles/reset.scss';
+import './styles/app.scss';
+import './styles/display.scss';
+import './styles/variables.scss';
+import './styles/pages/search_flight.scss';
+import './styles/pages/account.scss';
+import './styles/pages/admin.scss';
+import './styles/pages/product_page.scss';
+import './styles/pages/reservation.scss';
+import './styles/parts/alert.scss';
+import './styles/parts/footer.scss';
+import './styles/parts/animation.scss';
+import './styles/parts/form.scss';
+import './styles/parts/top_bar.scss';
+import './styles/parts/selection_products.scss';
+import './styles/parts/button.scss';
+import './styles/parts/search_bar.scss';
+import './styles/parts/table.scss';
+
+import { menuStart } from './js/menu.js';
+menuStart();

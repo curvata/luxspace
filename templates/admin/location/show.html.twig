@@ -1,0 +1,48 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Destination {{ location.title }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Visualiser la destination {{ location.title }}" />
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Destination ({{ location.title }})</h1>
+    <table class="th-sm">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+                <th>Image d'en-tête</th>
+                <td><img width="100px" src="{{ asset('./images/location/' ~ location.pictureHeader) }}"></img></td>
+            </tr>
+             <tr>
+                <th>Titre</th>
+                <td>{{ location.title }}</td>
+            </tr>
+            <tr>
+                <th>Description courte</th>
+                <td>{{ location.shortDescription }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ location.description }}</td>
+            </tr>
+            <tr>
+                <th>Galerie photos</th>
+                <td>
+                {% for picture in location.pictures %}
+                    <img width="100px" src="{{ asset('./images/location/' ~ picture.smallPicture) }}"></img>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <div class="flex_between">
+        <a class="btn_back"href="{{ path('location.index') }}">Retour</a>
+        <div class="flex">
+            <a class="btn_edit"href="{{ path('location.edit', {'id': location.id}) }}">Editer</a>
+            {{ include('admin/location/_delete_form.html.twig') }}
+        </div>
+    </div>       
+{% endblock %}

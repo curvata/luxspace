@@ -1,0 +1,28 @@
+<table>
+    <tbody>
+        <tr>
+            <td>Destination</td>
+            <td>{{ reservation.departure.destination }}</td>
+        </tr>
+        <tr>
+            <td>Prix vol aller</td>
+            <td>{{ reservation.departureprice|number_format(2, '.', ',') }} €</td>
+        </tr>
+        <tr>
+            <td>Prix vol retour</td>
+            <td>{{ reservation.returnprice|number_format(2, '.', ',') }} €</td>
+        </tr>
+        <tr>
+            <td>Passagers ({{ reservation.passengers|length }})</td>
+            <td>
+            {% for passenger in reservation.passengers %}
+                {{ passenger.lastname }}<br>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td><span class="price">{{ ((reservation.departureprice + reservation.returnprice) * (reservation.passengers|length))|number_format(2, '.', ',') }} €</span></td>
+        </tr>
+    </tbody>
+</table>

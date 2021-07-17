@@ -1,0 +1,127 @@
+@use "../app.scss";
+
+.passengers {
+    .passenger {
+        margin: 1rem;
+    }
+
+    form {
+        .fields {
+            display: flex;
+            flex-wrap: wrap;
+            .passenger {
+                .ico {
+                    img {
+                        max-height: 1rem;
+                        max-width: 1rem;
+                    }
+                }
+                h3 {
+                    font-size: 1rem
+                }
+                @extend .border_shadow_white;
+                padding: 1rem;
+                max-width: 241px;
+            }
+        } 
+        .bottom {
+            margin-left: auto;
+            margin-right: auto;
+            width: calc(60% - 1rem);
+            margin-top: 2rem;
+        }             
+    }
+}
+
+.flights {     
+    display: flex;
+    width: 100%;
+
+    .flight {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .card {
+            max-width: 800px;
+            &_title {
+                text-align: center;
+                font-size: 1rem;
+            }
+            &_content {
+                margin: 1rem;
+                tr {
+                    &:hover {
+                        background-origin: initial;
+                    }
+                    td {
+                        &:nth-child(1) {
+                            font-size: 1.3rem;
+                            font-weight: bold;
+                        }
+                        &:nth-child(2) {
+                            font-size: 1.2rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            } 
+        }
+    }
+}
+
+.recap_content {
+    display: flex;
+    .flights {
+        width: 70%;
+    }
+}
+
+.summary_reservation {
+    width: 30%;
+    p {
+        font-size: 1rem;
+        text-align: center 
+    }
+    .item {
+        @extend .border_shadow_white;
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-content);
+        margin: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    
+    .passengers {
+        .passenger {
+            min-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    } 
+    .flights {
+        flex-direction: column;
+        .flight {        
+            .card {
+                max-width: 1050px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }  
+    .recap_content {
+        flex-direction: column;
+        width: 100%;
+        .summary_reservation {
+            width: 100%;
+            .item {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+        .flights {
+            width: 100%;
+        }
+    }
+}

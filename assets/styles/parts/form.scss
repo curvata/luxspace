@@ -1,0 +1,84 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label, .col-form-label {
+        font-size:  1.5rem;
+        padding-bottom: 0.4rem;
+        display: flex;
+    }
+
+    #stringBirthday  {
+        min-width: 100%;
+    }
+
+    input, select{
+        width: 100%;
+        padding: 0.8rem;
+        line-height: 25px;
+        font-size: 1.2rem;
+        border-radius: var(--br);
+        -webkit-appearance: none;
+        border: 2px solid var(--grey);;
+        background: rgb(233, 233, 233);
+        transition: border 0.5s ease;
+        margin-bottom: 1rem;
+    
+        &:focus {
+            outline: none;
+            border-color: var(--blue);
+            background: rgb(243, 243, 243);
+        }
+
+        
+    }
+    .is-invalid {
+        border: 2px solid #eb4d4b;
+        .col-form-label {
+            font-size: 1rem;
+        }
+    }
+
+    textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--grey);;
+        background: rgb(233, 233, 233);
+        font-size: 1.5rem;
+    }
+
+    .form-error-icon, .sr-only{
+        display: none;
+    }
+}
+
+.invalid-feedback {
+    color:var(--red);
+    display: flex;
+
+    &:before {
+        content:'\26A0 ';
+    }
+
+    &:after {
+        content:'';
+    }
+
+    .d-block {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .form-group {
+        label, .col-form-label {
+            font-size:  1rem;
+        }
+    
+        input, select{
+            font-size: 1rem;
+        }
+    }
+}
+

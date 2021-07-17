@@ -1,0 +1,56 @@
+{% extends 'account/index.html.twig' %}
+
+{% block title %}LUXSPACE - Vos réservations{% endblock %}
+{% block description %}
+    <meta name="description" content="Index de vos réservations" />
+{% endblock %}
+{% block title_cat %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/calendar.png')}}" alt="Icône d'un calendrier"></img>
+    <h1>Mes réservations ({{ reservations.totalItemCount }})</h1>
+</div>
+{% endblock %} 
+
+{% block accountContent %}
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Statut</th>
+            <th>Destination</th>
+            <th>Date du départ</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for reservation in reservations %}
+    <tr>
+        <td><img width="100px" src="{{ asset('./images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{reservation.departure.destination.title}}"></img></td>
+        <td><span class="{% if reservation.status == "Payé" %}status_pay{% else %}status_refund{% endif %}">{{ reservation.status }}</span></td>
+        <td>{{ reservation.departure.destination }}</td>
+        <td>{{ reservation.departure.date ? reservation.departure.date|date('d-m-Y H:i:s') : '' }}</td>
+        <td>
+            <div class="flex_center">
+                <a class="btn_secondary" href="{{ path('account.reservations.incoice', {'id': reservation.id}) }}">Facture</a>
+                {% if reservation.status != 'Remboursé' and reservation.departure.date.format("d-m-Y H:i:s") > "now"|date("d-m-Y H:i:s") %}
+                    <a class="btn_edit" href="{{ path('account.reservations.passengers', {'id': reservation.id}) }}">Passagers</a>
+                    <form method="POST" action="{{ path('account.reservations.refund', {'id': reservation.id}) }}">
+                        <input type="hidden" name="token" value="{{ csrf_token('refund') }}">
+                        <button type="submit" class="btn_delete full">Rembourser</button>
+                    </form>
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5">Aucun enregistrement trouvé</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(reservations) }}
+<div class="flex">
+    <a class="btn_back" href="{{ path('account.index') }}">Retour</a>
+</div>
+{% endblock %}

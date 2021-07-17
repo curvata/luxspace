@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Mot de passe perdu{% endblock %}
+{% block description %}
+    <meta name="description" content="Renseigner votre adresse e-mail pour la procédure de modification de votre mot de passe" />
+{% endblock %}
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Réinitialiser mon mot de passe</h1>
+                <p class="subtitle"><span>Merci de renseigner votre adresse e-mail</span></p>
+                {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                <button class="btn_secondary full" type="submit">Réinitialiser</button>
+                {{ form_end(form) }}
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

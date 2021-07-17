@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Confirmation de commande{% endblock %}
+{% block description %}
+    <meta name="description" content="Merci d'avoir choisi Luxspace pour vos vols dans l'espace" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Confirmation de commande</h1>
+                <p class="message">{{ reservation.client.firstname }},
+                    <br></br>Nous vous remercions pour votre commande n° <strong>{{ reservation.reference }}</strong>
+                    <br></br>Une confirmation vient de vous être envoyée par email à l'adresse <strong>{{ reservation.client.email }}</strong>
+                </p>
+                <div class="form-group">
+                    <a class="btn_secondary full" href="{{ path('account.index') }}">Accéder à mon compte</a>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

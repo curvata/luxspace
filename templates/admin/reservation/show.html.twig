@@ -1,0 +1,41 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Réservation {{ reservation.reference }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Visualiser la réservation {{ reservation.reference }}" />
+{% endblock %}
+
+{% block adminContent %}
+<h1 class="htitle">Réservation ({{ reservation.reference }})</h1>
+<table class="table th-sm">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ reservation.id }}</td>
+        </tr>
+        <tr>
+            <th>Référence</th>
+            <td>{{ reservation.reference }}</td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ reservation.createAt ? reservation.createAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Prix vol de départ</th>
+            <td>{{ reservation.departureprice|number_format(2, '.', ',') }} €</td>
+        </tr>
+        <tr>
+            <th>Prix vol de retour</th>
+            <td>{{ reservation.returnprice|number_format(2, '.', ',') }} €</td>
+        </tr>
+    </tbody>
+</table>
+<div class="flex_between">
+    <a class="btn_back"href="{{ path('reservation.index') }}">Retour</a>
+    <div class="flex">
+        <a class="btn_edit"href="{{ path('reservation.edit', {'id': reservation.id}) }}">Editer</a>
+        {{ include('admin/reservation/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

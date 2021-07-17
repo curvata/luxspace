@@ -1,0 +1,19 @@
+.alert {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  color: white;
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+
+  &_danger {
+    @extend .alert;
+    background-color: #eb4d4b;
+  }
+  &_success {
+      @extend .alert;
+      background-color: #6ab04c;
+  }
+}

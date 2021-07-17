@@ -1,0 +1,51 @@
+@use "../app.scss";
+
+.account {
+    padding: var(--padding-content);
+    @extend .border_shadow_white;
+    
+    .passengers {
+        .fields {
+            .passenger {
+                max-width: 245px;
+
+            }
+        }
+    }
+
+    .summary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem;
+
+        .ico {
+            margin-bottom: 2rem;
+            border: 1px solid black;
+            border-radius: 2px;
+            padding: 1rem;
+        }
+    }
+}
+
+.status {
+    padding: 0.5rem;
+    color: white;
+    font-weight: bold;
+    border-radius: var(--br);
+    &_pay {
+        @extend .status;
+        background-color: var(--green);
+    }
+    &_refund {
+        @extend .status;
+        background-color: var(--red);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .account .summary {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

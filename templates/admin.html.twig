@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}LUXSPACE - Administration{% endblock %}</title>
+        <link rel="icon" href="{{ asset('./images/favicon.ico') }}"/>
+        {% block description %}
+            <meta name="description" content="Administration de Luxspace" />
+        {% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('chartjs') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="container">   
+                <nav class="topbar">
+                    <a href="{{ path('home') }}"><img class="topbar_logo" src="{{ asset('./images/logo.png')}}" alt="logo de Luxspace"></img></a>
+                    <ul class="topbar_menu">
+                        <li><a class="menu_link {{ isActive('admin')? 'active' }}" href="{{ path('admin')}}">SOMMAIRE</a></li>
+                        <li><a class="menu_link {{ isActive('location')? 'active' }}" href="{{ path('location.index')}}">DESTINATIONS</a></li>
+                        <li><a class="menu_link {{ isActive('user')? 'active' }}" href="{{ path('user.index')}}">UTILISATEURS</a></li>
+                        <li><a class="menu_link {{ isActive('departure')? 'active' }}" href="{{ path('departure.index')}}">DÉPARTS</a></li>
+                        <li><a class="menu_link {{ isActive('returned')? 'active' }}" href="{{ path('returned.index')}}">RETOURS</a></li>
+                        <li><a class="menu_link {{ isActive('reservation')? 'active' }}" href="{{ path('reservation.index')}}">RÉSERVATIONS</a></li>
+                    </ul>
+                    <div class="topbar_btn_menu_mobile">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        {% block headImage %}{% endblock %}
+        <div class="container">
+            {% for message in app.flashes('success') %}
+                <div class="alert_success">{{message}}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert_danger">{{message}}</div>
+            {% endfor %}
+        </div>
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+        <footer>
+            <div class="container">
+                 <section class="content">
+                    <p><img width="100" src="{{ asset('./images/logo.png') }}"></img> &#10072; <a href="{{ path('about')}}">C'est quoi ?</a> &#10072; Développé par <a href="https://menezes.be">Menezes</a></p>
+                    <div class="social">
+                        <img src="{{ asset('./images/icons/facebook.png')}}"></img>
+                        <img src="{{ asset('./images/icons/instagram.png')}}"></img>
+                        <img src="{{ asset('./images/icons/twitter.png')}}"></img>
+                    </div>
+                </section>
+            </div>
+        </footer>
+    </body>
+</html>

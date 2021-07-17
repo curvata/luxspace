@@ -1,0 +1,50 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Utilisateurs{% endblock %}
+{% block description %}
+    <meta name="description" content="Index des utilisateurs"/>
+{% endblock %}
+
+{% block adminContent %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/passenger.png')}}" alt="Icône d'un utilisateur"></img>
+    <h1>Utilisateurs ({{ users.totalItemCount }})</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>E-mail</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Date d'anniversaire</th>
+            <th>Pays</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.birthday ? user.birthday|date('d-m-Y') : '' }}</td>
+            <td>{{ user.country }}</td>
+            <td>
+                <a class="btn_secondary" href="{{ path('user.show', {'id': user.id}) }}">Voir</a>
+                <a class="btn_edit" href="{{ path('user.edit', {'id': user.id}) }}">Editer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(users) }}
+<div class="flex">
+    <a class="btn_secondary" href="{{ path('user.new') }}">Créer</a>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+<div class="flex">
+    <div class="left_zone">
+        {{ form_row(form.pictureFiles) }}
+        <div class="flex">
+            <div class="left_zone">
+            {% if location.pictureHeader %}
+                <img src="{{ asset('./images/location/' ~ location.pictureHeader) }}"></img>
+            {% endif %}
+            </div>
+            <div class="right_zone">
+                {{ form_row(form.headerPictureFile) }}
+            </div>
+        </div>
+    </div>
+     <div class="right_zone">
+        {{ form_row(form.title) }}
+        {{ form_row(form.shortDescription) }}
+        {{ form_row(form.slug) }}
+    </div>
+</div>
+{{ form_row(form.description) }}
+{{ form_rest(form) }}
+<div class="flex_between">
+    <a class="btn_back"href="{{ path('location.index') }}">Retour</a>
+    <div class="flex">
+        <button class="btn_save">{{ button_label|default('Sauvegarder') }}</button> 
+        {{ form_end(form) }}
+        {% if location.id %}
+            {{ include('admin/location/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Destinations{% endblock %}
+{% block description %}
+    <meta name="description" content="Index des destinations" />
+{% endblock %}
+
+{% block adminContent %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/location.png')}}" alt="Icône d'une planète"></img>
+    <h1>Destinations ({{ locations.totalItemCount }})</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>En-tête</th>
+            <th>Titre</th>
+            <th>Description courte</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for location in locations %}
+        <tr>
+            <td>{{ location.id }}</td>
+            <td><img width="100px" src="{{ asset('./images/location/' ~ location.pictureHeader) }}" alt="{{ location.title }}"></img></td>
+            <td>{{ location.title }}</td>
+            <td>{{ location.shortDescription }}</td>
+            <td>
+                <a class="btn_secondary" href="{{ path('location.show', {'id': location.id}) }}">Voir</a>
+                <a class="btn_edit" href="{{ path('location.edit', {'id': location.id}) }}">Editer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(locations) }}
+<div class="flex">
+    <a class="btn_secondary" href="{{ path('location.new') }}">Créer</a>
+</div>
+{% endblock %}

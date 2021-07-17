@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Créer un utilisateur{% endblock %}
+{% block description %}
+    <meta name="description" content="Créer un nouvel utilisateur" />
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+{% endblock %}
+{% block adminContent %}
+    <h1>Créer un utilisateur</h1>
+    {{ include('admin/user/_form.html.twig') }}
+{% endblock %}

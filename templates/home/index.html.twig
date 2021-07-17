@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Réservation de vols pour l'espace{% endblock %}
+{% block description %}
+    <meta name="description" content="Réservez vos vols dans l'espace avec Luxspace" />
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('build/home.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+{% endblock %}
+{% block flash %}
+{% endblock %}
+
+{% block body %}
+<section class="homepage_header">
+    <img class="zoom" src="{{ asset('./images/homepage/home.jpg') }}"></img>
+    <div class="text_intro">
+        <h1>LA MANIÈRE LA PLUS SÛRE<br><span>D'EXPLORER LA GALAXIE</span></h1>
+    </div>
+</section>
+<div class="container">
+    <main>
+        <section class="search_bar">
+            {% include "search/parts/search.html.twig" %}
+        </section>
+        <section class="selection_products">
+            <h2 class="htitle_center">LES DESTINATIONS POPULAIRES</h2>
+            <p class="subtitle"><span>Les destinations préférées de nos clients<span></p>
+            <div class="items">
+                {% for destination in destinations %}
+                    {% include('./destinations/parts/product.html.twig') %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}

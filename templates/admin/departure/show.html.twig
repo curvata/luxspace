@@ -1,0 +1,53 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Vol de départ {{ departure.reference }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Visualiser le vol de départ {{ departure.reference }}"/>
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Vol de départ ({{ departure.reference }})</h1>
+    <table class="table th-sm">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ departure.id }}</td>
+            </tr>
+            <tr>
+                <th>Référence</th>
+                <td>{{ departure.reference }}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ departure.destination }}</td>
+            </tr>
+            <tr>
+                <th>Date de départ</th>
+                <td>{{ departure.date ? departure.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de places</th>
+                <td>{{ departure.seat }}</td>
+            </tr>
+            <tr>
+                <th>Nom de la fusée</th>
+                <td>{{ departure.rocket }}</td>
+            </tr>
+            <tr>
+                <th>Durée de vol</th>
+                <td>{{ departure.duration }}</td>
+            </tr>
+            <tr>
+                <th>Prix pour une personne</th>
+                <td>{{ departure.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="flex_between">
+        <a class="btn_back"href="{{ path('departure.index') }}">Retour</a>.
+        <div class="flex">
+            <a class="btn_edit"href="{{ path('departure.edit', {'id': departure.id}) }}">Editer</a>
+            {{ include('admin/departure/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

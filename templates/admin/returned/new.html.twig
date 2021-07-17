@@ -1,0 +1,11 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Créer un vol de retour{% endblock %}
+{% block description %}
+    <meta name="description" content="Créer un nouveau vol de retour" />
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Créer un vol de retour</h1>
+    {{ include('admin/returned/_form.html.twig') }}
+{% endblock %}

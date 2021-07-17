@@ -1,0 +1,54 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Vols de départs{% endblock %}
+{% block description %}
+    <meta name="description" content="Index des vols de départs" />
+{% endblock %}
+
+{% block adminContent %}
+<div class="ico">
+    <img src="{{ asset('./images/icons/departure.png')}}" alt="Icône d'une fusée qui décolle"></img>
+    <h1>Vols de départs ({{ departures.totalItemCount }})</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Référence</th>
+            <th>Destination</th>
+            <th>Date de départ</th>
+            <th>Nombre de places</th>
+            <th>Nom de la fusée</th>
+            <th>Durée de vol</th>
+            <th>Prix pour une personne</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for departure in departures %}
+        <tr>
+            <td>{{ departure.id }}</td>
+            <td>{{ departure.reference }}</td>
+            <td>{{ departure.destination }}</td>
+            <td>{{ departure.date ? departure.date|date('d-m-Y H:i:s') : '' }}</td>
+            <td>{{ departure.seat }}</td>
+            <td>{{ departure.rocket }}</td>
+            <td>{{ departure.duration }}</td>
+            <td>{{ departure.price }}</td>
+            <td>
+                <a class="btn_secondary" href="{{ path('departure.show', {'id': departure.id}) }}">Voir</a>
+                <a class="btn_edit" href="{{ path('departure.edit', {'id': departure.id}) }}">Editer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ knp_pagination_render(departures) }}
+<div class="flex">
+    <a class="btn_secondary"href="{{ path('departure.new') }}">Créer</a>
+</div>
+{% endblock %}

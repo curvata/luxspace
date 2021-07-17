@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+<div class="flex">
+    <div class="left_zone">
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.stringBirthday) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.postalCode) }}
+        {{ form_row(form.city) }}
+    </div>
+    <div class="right_zone">
+        {{ form_row(form.country) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+    </div>
+</div>
+    {{ form_rest(form) }}
+<div class="flex_between">
+    <a class="btn_back" href="{{ path('user.index') }}">Retour</a>
+    <div class="flex">
+        <button class="btn_save">{{ button_label|default('Sauvegarder') }}</button>
+        {{ form_end(form) }}
+        {% if user.id %}
+            {{ include('admin/user/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>

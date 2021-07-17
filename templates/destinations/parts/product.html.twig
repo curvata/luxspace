@@ -1,0 +1,16 @@
+<article class="card">
+    <div class="card_image">
+        <a href="{{ path('destination.show', {'id': destination[0].id })}}">
+        <img class="img_hover" src="{{ asset('images/location/' ~ destination[0].pictureHeader) }}" alt="{{ destination[0].title }}">
+        </a>
+    </div>
+    <h3 class="card_title">{{ destination[0].title }}</h3>
+    <div class="card_content">
+        <p class="description">{{ destination[0].shortDescription }}</p>
+        <div class="bottom">
+            <a class="btn_secondary" href="{{ path('destination.show', {'id': destination[0].id })}}">Voir</a>
+            <p> à partir de <span class="price">{{ destination.minPrice|number_format(2, '.', ',') }} €</span></p>
+        </div>
+    </div>
+</article>
+   

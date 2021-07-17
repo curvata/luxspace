@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Editer l'utilisateur {{ user.id }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Modifier l'utilisateur {{ user.id }}" />
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Editer l'utilisateur ({{ user.lastname }} {{ user.firstname }})</h1>
+    {{ include('admin/user/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+{% endblock %}

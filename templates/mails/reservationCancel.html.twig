@@ -1,0 +1,8 @@
+{% extends 'mails/mail.html.twig' %}
+
+{% block body %}
+Bonjour {{ content.client.lastname }} {{ content.client.firstname }},<br></br>
+Nous avons bien annulé la réservation n° <strong>{{ content.reference }}</strong>, 
+le remboursement a bien été effectué et vous devriez le recevoir sur votre compte d'ici peu.<br><br>
+À bientôt chez Luxspace.
+{% endblock %}

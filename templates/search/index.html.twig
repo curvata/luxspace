@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Recherche de vols{% endblock %}
+{% block description %}
+    <meta name="description" content="Recherchez vos vols aller et retour pour l'espace "/>
+{% endblock %}
+{% block flash %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('datePicker') }}
+    {{ encore_entry_script_tags('selectFlight') }}
+{% endblock %}
+
+{% block body %}
+<div class="header_section">
+    <img class="zoom" src="{{ asset('./images/homepage/home.jpg')}}" alt="Image de la terre avec une capsule Luxspace"></img>
+</div>
+<div class="container">
+    <main>
+        <section class="search_bar">
+           {% include "./search/parts/search.html.twig" %}
+        </section>
+        <section class="search_flights">
+            <h1 class="htitle_center">Choisissez vos vols de départ et de retour</h1>
+            <p class="subtitle"><span>Découvrez les richesses de l'espace</span></p>
+            {% for message in app.flashes('success') %}
+                <div class="alert_success">{{message}}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert_danger">{{message}}</div>
+            {% endfor %}
+            <form class="content" action="{{ path('reservations.index') }}">
+                <div class="lists">
+                    <section class="list">
+                        <div class="ico"><img src="{{ asset('./images/icons/departure.png') }}" alt="Icône d'une fusée"></img><h2>Vols aller</h2></div>
+                        {% if departures is not defined or departures|length <= 0 %}
+                            <p class="list_info">Aucun vol de retour disponible, veuillez choisir une autre date.</p>
+                        {% else %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ref</th>
+                                    <th>Destination</th>
+                                    <th>Départ</th>
+                                    <th>Fusée</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for departure in departures %}
+                                    <tr class="departure_select" id="{{ departure.id }}">
+                                        <td><h3>{{ departure.reference }}</h3></td>
+                                        <td>
+                                            <div class="list_ico">LUX <img src="{{ asset('./images/icons/rocket_flight.png')}}"></img> {{ departure.destination|upper }}</div>
+                                            <span class="list_hour">({{ departure.duration }} heures)</p>
+                                        </td>
+                                        <td class="list_time">{{ departure.date|date('H:i:s') }}</td>
+                                        <td class="list_rocket_name">{{ departure.rocket }}</td>
+                                        <td>
+                                            <div class="price">{{ departure.price|number_format(0, ' ', ' ') }} €</div>
+                                            <span class="list_seat">
+                                                ({{ departure.seat }} siège{% if departure.seat > 1 %}s{% endif %} libre{% if departure.seat > 1 %}s{% endif %})
+                                            </span>                                        
+                                        </td>                                    
+                                    </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </section>
+                    <section class="list">
+                        <div class="ico"><img src="{{ asset('./images/icons/returned.png')}}"></img><h2>Vols retour</h2></div>
+                        {% if returneds is not defined or returneds|length <= 0 %}
+                            <p class="list_info">Aucun vol de retour disponible, veuillez choisir une autre date.</p>
+                        {% else %}
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Ref</th>
+                                    <th>Destination</th>
+                                    <th>Départ</th>
+                                    <th>Fusée</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for returned in returneds %}
+                                    <tr class="return_select" id="{{ returned.id }}">
+                                        <td><h3>{{ returned.reference }}</h3></td>
+                                        <td>
+                                            <div class="list_ico"> {{ returned.ffrom|upper }} <img src="{{ asset('./images/icons/rocket_flight.png')}}"></img> LUX</div>
+                                            <span class="list_hour">({{ returned.duration }} heures)</span>
+                                        </td>
+                                        <td class="list_time">{{ returned.date|date('H:i:s') }}</td>
+                                        <td class="list_rocket_name">{{ returned.rocket }}</td>
+                                        <td>
+                                            <div class="price">{{ returned.price|number_format(0, ' ', ' ') }} €</div>
+                                            <span class="list_seat">
+                                                ({{ returned.seat }} siège{% if returned.seat > 1 %}s{% endif %} libre{% if returned.seat > 1 %}s{% endif %} )
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </section>
+                </div>
+                {% if departures is defined and departures|length > 0 and returneds is defined and returneds|length > 0 %}
+                    <button class="btn_secondary medium">Réserver mes vols</button>
+                    <input type="hidden" name="passengers" value="{{ passengers }}">
+                {% endif %}
+                <input id="input_departure" type="checkbox" name="departure">
+                <input id="input_return" type="checkbox" name="return">
+            </form>
+        </section>
+    </main>
+</div>
+{% endblock %}

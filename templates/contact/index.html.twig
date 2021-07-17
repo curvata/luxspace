@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LUXSPACE - Contact{% endblock %}
+{% block description %}<meta name="description" content="Formulaire de contact"/>{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main>
+        <div class="flex_center">
+            <section class="middle">
+                <h1 class="htitle_center">Contact</h1>
+                <p class="subtitle"><span>Un conseiller vous recontactera dans les plus brefs délais.</span></p>
+                {{ form_start(form) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.message) }}
+                {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

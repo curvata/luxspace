@@ -1,0 +1,9 @@
+{% extends 'mails/mail.html.twig' %}
+
+{% block body %}
+<h3>Vous avez reçu un message depuis le formulaire de contact LUXSPACE</h3>
+Nom: {{ content.lastname }}
+<br>Prénom: {{ content.firstname }} 
+<br>E-mail: {{ content.email }}
+<br>Message: {{ content.message }}
+{% endblock %}

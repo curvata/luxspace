@@ -1,0 +1,117 @@
+.btn {
+    display: block;
+    border-radius: var(--br);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    color: white;
+    padding: 10px;
+    background-color: var(--grey);
+    display: block;
+    margin: 1rem 0 1rem 0;
+
+    &:hover {
+        transform: scale(1.01);
+        cursor: pointer;
+        color: white;
+    }
+
+    &_primary {
+        @extend .btn;
+        margin: 0;
+        background-color: var(--red);
+        &:hover {
+            background-color: var(--red-hover);
+        }
+      }
+
+    &_secondary {
+        @extend .btn;
+        background-color: var(--blue);
+        &:hover {
+            background-color: var(--blue-hover);
+        }
+    }
+
+    &_delete {
+        @extend .btn;
+        background-color: var(--red);
+        &:hover {
+                background-color: var(--red-hover);
+        }
+    }
+
+    &_edit {
+        @extend .btn;
+        background-color: var(--orange);
+
+        &:hover {
+                background-color: var(--orange-hover);
+        }
+    }
+
+    &_save {
+        @extend .btn;
+        background-color:  var(--green);
+
+        &:hover {
+                background-color: var(--green-hover);
+        }
+    }
+
+    &_back {
+        @extend .btn;
+        background-color: var(--blue);
+        
+        &:hover {
+            background-color: var(--blue-hover);
+        }
+    }
+}
+
+.flex_center > .btn_secondary{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.btn_edit + form,
+.btn_save + form{
+    margin-left: 1rem;
+}
+
+.full {
+    width: 100%;
+}
+
+.medium {
+    width: 70%;
+}
+
+@media screen and (max-width: 1050px) {
+    .medium {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .btn {
+        font-size: 1.2rem;
+    }
+    .btn_edit + form {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .btn_primary, .flex > .btn_secondary, .flex_center > .btn_secondary, .btn_back, .btn_save, .btn_delete, .btn_edit {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    * > form {
+        width: 100%;
+    }
+}

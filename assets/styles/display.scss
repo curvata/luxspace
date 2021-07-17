@@ -1,0 +1,150 @@
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    &_start {
+        @extend .flex;
+        justify-content: flex-start;
+    }
+    &end {
+        @extend .flex;
+        justify-content: flex-end;
+    }
+    &_column {
+        @extend .flex;
+        flex-direction: column;
+    }
+    
+    &_between {
+        @extend .flex;
+        justify-content: space-between;
+    }
+    
+    &_around {
+        @extend .flex;
+        justify-content: space-around;
+    }
+    
+    &_center {
+        @extend .flex;
+        justify-content: center;
+    }
+    &_align_center {
+        @extend .flex;
+        align-items: center;
+    }
+}
+
+.left_zone {
+    width: 50%;
+    padding-right: 1rem;
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.right_zone {
+    width: 50%;
+}
+  
+.content {
+    flex: 1 0 auto;
+}
+
+main {
+    height: 100%;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    padding: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.middle {
+    display: flex; 
+    flex-direction: column;
+    width: 60%;
+    font-size: 1rem;
+    border-radius: var(--br);
+    box-shadow: var(--shadow);
+    background-color: white;
+    padding: var(--padding-content);
+
+    p {
+        margin-bottom: 2rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .after_login {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .left_zone {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .right_zone {
+        width: 100%;
+    }
+    .middle {
+        width: 100%
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    .middle {
+        width: 80%
+    }
+}
+
+@media screen and (max-width: 500px) {
+        .flex {
+            justify-content: center;
+            form {
+                margin-left: 0;
+            }
+        }
+        .flex_between {
+            flex-direction: column;
+            justify-content: center;
+        .btn_back {
+            order: 1;
+        }
+    } 
+     
+}
+
+@media screen and (max-width: 500px) {
+    .flex_between {
+        justify-content: center;
+        .flex {
+            form {
+                margin-left: 0;
+            }
+            justify-content: center;
+        }
+        .btn_back{
+            order:1;
+        }
+    }
+}

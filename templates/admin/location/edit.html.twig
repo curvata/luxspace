@@ -1,0 +1,17 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Administration - Editer la destination {{ location.title }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Modifier la destination {{ location.title }}" />
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('pictureLocation') }}
+{% endblock %}
+
+{% block adminContent %}
+    <h1 class="htitle">Editer la destination ({{ location.title }})</h1> 
+       {% if location.pictures|length > 0 %}
+        <div class="flex_align_center pictures" data-location="{{ location.id }}"></div>
+    {% endif %}
+    {{ include('admin/location/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+{% endblock %}
