@@ -18,13 +18,17 @@
         <p class="subtitle"><span>{{ departure.destination.shortDescription }}</span></p>
         <section class="flights">
                 <article class="flight">
-                    <div class="ico"><img src="{{ asset('./images/icons/departure.png')}}" alt="Icône d'une fusée qui décolle"></img><h2>Vol aller</h2></div>
+                    <div class="ico"><i class="fa-solid fa-rocket ico_fa dep"></i><h2>Vol aller</h2></div>
                     <div class="card">
                         <div class="card_image">
-                            <img src="{{ asset('images/location/' ~ departure.destination.pictureHeader) }}" alt="{{ departure.destination.title }}">
+                            <img src="{{ asset('images/location/' ~ departure.destination.pictureHeader) }}" alt="{{ departure.destination.title }}" loading="lazy">
                         </div>
                         <div class="card_title">
-                            <h3>LUXEMBOURG <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png')}}" alt="Icône d'une fusée"></img> {{ departure.destination|upper }}</h3>
+                            <div class="card_route">
+                                <span class="card_route__city">LUXEMBOURG</span>
+                                <span class="card_route__sep">✦</span>
+                                <span class="card_route__city">{{ departure.destination|upper }}</span>
+                            </div>
                         </div>
                         <div class="card_content">
                             {% include "reservation/parts/departure.html.twig" %}
@@ -32,13 +36,17 @@
                     </div>
                 </article>
                 <article class="flight">
-                    <div class="ico"><img src="{{ asset('./images/icons/returned.png')}}" alt="Icône d'une fusée qui retourne atterit"></img><h2>Vol retour</h2></div>
+                    <div class="ico"><i class="fa-solid fa-rocket ico_fa ret"></i><h2>Vol retour</h2></div>
                     <div class="card">
                         <div class="card_image">
-                            <img src="{{ asset('images/location/' ~ return.ffrom.pictureHeader) }}" alt="{{ return.ffrom.title }}">
+                            <img src="{{ asset('images/location/' ~ return.ffrom.pictureHeader) }}" alt="{{ return.ffrom.title }}" loading="lazy">
                         </div>
                         <div class="card_title">
-                            <h3>{{ return.ffrom|upper }} <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png')}}"></img> LUXEMBOURG</h3>
+                            <div class="card_route">
+                                <span class="card_route__city">{{ return.ffrom|upper }}</span>
+                                <span class="card_route__sep">✦</span>
+                                <span class="card_route__city">LUXEMBOURG</span>
+                            </div>
                         </div>
                         <div class="card_content">
                             {% include "reservation/parts/return.html.twig" %}
@@ -50,12 +58,12 @@
          {% for message in app.flashes('errorPassager') %}
                 <div class="alert_danger">{{message}}</div>
             {% endfor %}
-            <div class="ico"><img src="{{ asset('./images/icons/passenger.png')}}"></img><h2>Passagers</h2></div>
+            <div class="ico"><i class="fa-solid fa-users ico_fa"></i><h2>Passagers</h2></div>
                 <form action="{{ path('reservation.recap') }}" method="POST">
                     <div class="fields">
                         {% for i in 1.. passengers %}
                             <div class="passenger">
-                                <div class="ico"><img src="{{ asset('./images/icons/user.png') }}" alt="Icône utilisateur"></img><h3>Passager numéro {{ i }}</h3></div>
+                                <div class="ico"><i class="fa-regular fa-user ico_fa"></i><h3>Passager numéro {{ i }}</h3></div>
                                 <div class="form-group">
                                     <input id="passenger_{{ i }}_firstname"type="text" name="passengers[{{ i }}][firstname]" placeholder="Nom" required></input>
                                 </div>
@@ -67,7 +75,7 @@
                         </div>
                     <div class="flex_between">
                         <a class="btn_back" href="{{ app.request.server.get('HTTP_REFERER') }}">Retour</a>
-                        <button class="btn_save" type="submit">Confirmer ma réservation</button>
+                        <button class="btn_primary btn_cta" type="submit">Confirmer ma réservation</button>
                     </div>
                     <input type="hidden" name="token" value="{{ csrf_token('reservation') }}"/>
                     <input type="hidden" name="departure" value="{{ departure.id }}">

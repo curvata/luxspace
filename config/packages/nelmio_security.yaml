@@ -1,0 +1,47 @@
+nelmio_security:
+    # prevents framing of the entire site
+    clickjacking:
+        paths:
+            '^/.*': DENY
+
+    # disables content type sniffing for script resources
+    content_type:
+        nosniff: true
+
+    referrer_policy:
+        enabled: true
+        policies:
+            - 'no-referrer'
+            - 'strict-origin-when-cross-origin'
+
+    # Content Security Policy
+    csp:
+        enabled: true
+        hosts: []
+        content_types: []
+        enforce:
+            default-src:
+                - 'self'
+            script-src:
+                - 'self'
+                - 'unsafe-inline'
+                - 'https://polyfill.io'
+                - 'https://js.stripe.com'
+                - 'https://cdn.jsdelivr.net'
+            style-src:
+                - 'self'
+                - 'unsafe-inline'
+                - 'https://fonts.googleapis.com'
+                - 'https://cdn.jsdelivr.net'
+                - 'https://cdnjs.cloudflare.com'
+            font-src:
+                - 'self'
+                - 'https://fonts.gstatic.com'
+                - 'https://cdnjs.cloudflare.com'
+            img-src:
+                - 'self'
+                - 'data:'
+            connect-src:
+                - 'self'
+            frame-src:
+                - 'https://js.stripe.com'

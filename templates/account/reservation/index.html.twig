@@ -6,8 +6,8 @@
 {% endblock %}
 {% block title_cat %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/calendar.png')}}" alt="Icône d'un calendrier"></img>
-    <h1>Mes réservations ({{ reservations.totalItemCount }})</h1>
+    <i class="fa-solid fa-ticket ico_fa"></i>
+    <h1>Mes réservations <span class="count_badge">{{ reservations.totalItemCount }}</span></h1>
 </div>
 {% endblock %} 
 
@@ -25,10 +25,10 @@
     <tbody>
     {% for reservation in reservations %}
     <tr>
-        <td><img width="100px" src="{{ asset('./images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{reservation.departure.destination.title}}"></img></td>
+        <td><img src="{{ asset('./images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{reservation.departure.destination.title}}" loading="lazy"></td>
         <td><span class="{% if reservation.status == "Payé" %}status_pay{% else %}status_refund{% endif %}">{{ reservation.status }}</span></td>
         <td>{{ reservation.departure.destination }}</td>
-        <td>{{ reservation.departure.date ? reservation.departure.date|date('d-m-Y H:i:s') : '' }}</td>
+        <td>{{ reservation.departure.date ? reservation.departure.date|format_date('long', locale='fr') : '' }}</td>
         <td>
             <div class="flex_center">
                 <a class="btn_secondary" href="{{ path('account.reservations.incoice', {'id': reservation.id}) }}">Facture</a>

@@ -15,7 +15,7 @@ class DestinationTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/destination');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', "NOS DESTINATIONS");
+        $this->assertSelectorTextContains('h1', "Les destinations");
     }
 
     public function testDesinationShow()
@@ -25,7 +25,7 @@ class DestinationTest extends WebTestCase
         $crawler = $client->request('GET', '/destination/1');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', "Mars");
-        $this->assertSelectorTextContains('h2', "VOUS AIMEREZ");
+        $this->assertSelectorTextContains('h2', "Vous aimerez aussi");
         $this->assertEquals(
             4,
             $crawler->filter('h3')->count());
@@ -40,7 +40,7 @@ class DestinationTest extends WebTestCase
         $this->assertSelectorTextContains('h1', "Mars");
         $this->assertEquals(
             0,
-            $crawler->filter('h2:contains("VOUS AIMEREZ")')->count());
+            $crawler->filter('h2:contains("Vous aimerez aussi")')->count());
         $this->assertEquals(
             0,
             $crawler->filter('h3')->count());

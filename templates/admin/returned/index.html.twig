@@ -7,8 +7,8 @@
 
 {% block adminContent %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/returned.png')}}" alt="Icône d'une fusée qui attérit"></img>
-    <h1>Vols de retours ({{ returneds.totalItemCount }})</h1>
+    <i class="fa-solid fa-rocket ico_fa ret"></i>
+    <h1>Vols de retours <span class="count_badge">{{ returneds.totalItemCount }}</span></h1>
 </div>
 <table>
     <thead>

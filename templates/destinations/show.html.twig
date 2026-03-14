@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LUXSPACE - Destination {{ destination.title }}{% endblock %}
-{% block description %}<meta name="description" content="Présentation de la destination {{ destination.title }}" />{% endblock %}
+{% block title %}LUXSPACE - {{ destination.title }}{% endblock %}
+{% block description %}<meta name="description" content="Voyage vers {{ destination.title }} avec LUXSPACE" />{% endblock %}
+{% block opengraph %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LUXSPACE" />
+    <meta property="og:title" content="LUXSPACE — {{ destination.title }}" />
+    <meta property="og:description" content="{{ destination.shortDescription }}" />
+    <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}{{ asset('images/location/' ~ destination.pictureHeader) }}" />
+    <meta property="og:url" content="{{ app.request.uri }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
 {% endblock %}
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
     {{ encore_entry_script_tags('datePicker') }}
     {{ encore_entry_script_tags('splidejs') }}
 {% endblock %}
@@ -19,29 +29,33 @@
         <section class="product_show">
             <div class="product_pictures">
                 <div class="splide splide_f">
-	                <div class="splide__track">
-	                	<ul class="splide__list">
+                    <div class="splide__track">
+                        <ul class="splide__list">
                             {% for picture in destination.pictures %}
-	                		    <li class="splide__slide"><img src="{{ asset('images/location/' ~ picture ) }}" alt="image de {{ destination.title }}"></img></li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('images/location/' ~ picture) }}" alt="{{ destination.title }}" loading="lazy">
+                                </li>
                             {% endfor %}
-	                	</ul>
-	                </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <article class="details">
                 <div class="content">
                     <h1 class="content_title">{{ destination.title }}</h1>
-                    <p class="content_description">{{ destination.description }}</p>
+                    <div class="content_description ql-snow"><div class="ql-editor">{{ destination.description|raw }}</div></div>
                 </div>
                 <div class="mini_search">
                     {% include "./destinations/parts/search.html.twig" %}
                 </div>
             </article>
         </section>
+
         {% if destinations %}
             <section class="selection_products">
-                <h2 class="htitle_center">VOUS AIMEREZ</h2>
-                <p class="subtitle"><span>Des destinations incroyables</span></p>
+                <h2 class="htitle_center">Vous aimerez aussi</h2>
+                <p class="subtitle"><span>D'autres destinations incroyables</span></p>
+                <span class="section-divider"></span>
                 <div class="items">
                     {% for destination in destinations %}
                         {% include "./destinations/parts/product.html.twig" %}

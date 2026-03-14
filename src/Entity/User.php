@@ -55,7 +55,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank(message: "Merci de renseigner votre prénom")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "Le prénom ne peut contenir que des lettres, des tirets et des espaces")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "Le prénom ne peut contenir que des lettres, des tirets et des espaces")]
     #[Assert\Length(
         min: 3,
         max: 20,
@@ -68,7 +68,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank(message: "Merci de renseigner votre nom")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "Le nom ne peut contenir que des lettres, des tirets et des espaces")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "Le nom ne peut contenir que des lettres, des tirets et des espaces")]
     #[Assert\Length(
         min: 5,
         max: 30,
@@ -122,7 +122,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
     */
     #[Assert\NotBlank(message: "Merci de renseigner votre ville")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "La ville ne doit contenir que des lettres")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "La ville ne doit contenir que des lettres")]
     #[Assert\Length(
         min: 5,
         max: 20,
@@ -135,7 +135,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank(message: "Merci de renseigner votre pays")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "Le pays ne doit contenir que des lettres")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "Le pays ne doit contenir que des lettres")]
     #[Assert\Length(
         min: 2,
         max: 40,

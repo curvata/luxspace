@@ -1,13 +1,31 @@
 .zoom {
-    animation: scale 50s linear infinite;
-  }
-    
-  @keyframes scale {
-    50% {
-      -webkit-transform:scale(1.2);
-      -moz-transform:scale(1.2);
-      -ms-transform:scale(1.2);
-      -o-transform:scale(1.2);
-      transform:scale(1.2);
+    animation: scale 60s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes scale {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
     }
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0%   { opacity: 0.5; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.7s ease forwards;
+}

@@ -54,6 +54,7 @@ class ProductSearchFlightType extends AbstractType
                 ChoiceType::class,
                 [
                 'label' => 'Passagers',
+                'placeholder' => 'Nb. passagers',
                 'choices' => [
                     '1' => 1,
                     '2' => 2,

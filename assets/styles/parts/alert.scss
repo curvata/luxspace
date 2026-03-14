@@ -1,19 +1,113 @@
-.alert {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding: 1rem;
-  margin: 1rem;
-  color: white;
-  border-radius: 2px;
-  box-shadow: var(--shadow);
+/* Toast — position fixe, ne perturbe pas le layout */
+.toast_container {
+    position: fixed;
+    top: 5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    pointer-events: none;
+    max-width: 360px;
+}
 
-  &_danger {
-    @extend .alert;
-    background-color: #eb4d4b;
-  }
-  &_success {
-      @extend .alert;
-      background-color: #6ab04c;
-  }
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: var(--br);
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.5;
+    pointer-events: all;
+    backdrop-filter: blur(12px);
+    animation: toast-in 0.3s ease forwards;
+    cursor: pointer;
+
+    &_error {
+        @extend .toast;
+        background: rgba(20, 5, 10, 0.92);
+        border: 1px solid rgba(255, 77, 109, 0.4);
+        color: #ff8099;
+        box-shadow: 0 4px 24px rgba(255, 77, 109, 0.15);
+
+        &::before {
+            content: '\f057';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+    }
+
+    &_success {
+        @extend .toast;
+        background: rgba(5, 16, 10, 0.92);
+        border: 1px solid rgba(78, 203, 113, 0.4);
+        color: #72e090;
+        box-shadow: 0 4px 24px rgba(78, 203, 113, 0.12);
+
+        &::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+    }
+
+    &.hide {
+        animation: toast-out 0.3s ease forwards;
+    }
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toast-out {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(20px); }
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: var(--br-sm);
+    border: 1px solid transparent;
+
+    &_danger {
+        @extend .alert;
+        background-color: rgba(255, 77, 109, 0.1);
+        border-color: rgba(255, 77, 109, 0.3);
+        color: #ff8099;
+
+        &::before {
+            content: '✕';
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+    }
+
+    &_success {
+        @extend .alert;
+        background-color: rgba(78, 203, 113, 0.1);
+        border-color: rgba(78, 203, 113, 0.3);
+        color: #72e090;
+
+        &::before {
+            content: '✓';
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+    }
 }

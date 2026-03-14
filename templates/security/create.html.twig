@@ -2,7 +2,7 @@
 
 {% block title %}LUXSPACE - Créer un compte{% endblock %}
 {% block description %}
-            <meta name="description" content="Créer un compte client sur Luxspace" />
+            <meta name="description" content="Créer un compte client sur LUXSPACE" />
         {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -31,7 +31,7 @@
                 {{ form_row(form.country) }}
                 {{ form_row(form.email) }}
                 {{ form_row(form.password) }}
-                <button class="btn_secondary full" type="submit">Créer un compte</button>
+                <button class="btn_primary btn_cta full" type="submit">Créer un compte</button>
                 {{ form_end(form) }}
             </section>
         </div>

@@ -16,7 +16,7 @@
                 </p>
                 <form action="{{ path('reservation.recap') }}" method="POST">
                     <div class="form-group">
-                        <button class="btn_secondary full" type="submit">Réessayer le paiement</button>
+                        <button class="btn_primary full" type="submit">Réessayer le paiement</button>
                     </div>
                     <input type="hidden" name="token" value="{{ csrf_token('reservation') }}"/>
                 </form>

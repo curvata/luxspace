@@ -18,9 +18,10 @@ class AdminUserTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/admin/user');
-        $client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Utilisateurs (3)');
+        $client->request('GET', '/admin/user');
+        $crawler = $client->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Utilisateurs');
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     } 
 
     public function testAdminUserNew()

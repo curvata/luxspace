@@ -18,9 +18,10 @@ class AdminLocationTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/admin/location');
-        $client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Destinations (6)');
+        $client->request('GET', '/admin/location');
+        $crawler = $client->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Destinations');
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     } 
 
     public function testAdminLocationNew()

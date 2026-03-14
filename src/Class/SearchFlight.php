@@ -18,7 +18,7 @@ class SearchFlight
     private DateTime $returned;
 
     #[Assert\Range(min: 1, max: 9, notInRangeMessage: "Invalide")]
-    private int $passagers;
+    private ?int $passagers = null;
 
     public function getDestination(): ?Location
     {
@@ -69,7 +69,7 @@ class SearchFlight
         return $this->passagers;
     }
 
-    public function setPassagers(int $passagers): self
+    public function setPassagers(?int $passagers): self
     {
         $this->passagers = $passagers;
 

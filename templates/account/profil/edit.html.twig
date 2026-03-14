@@ -6,7 +6,7 @@
 {% endblock %}
 {% block title_cat %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/user.png') }}" alt="Icône d'un utilisateur"></img>
+    <i class="fa-solid fa-address-card ico_fa"></i>
     <h1>Modifier mes cordonnées</h1>
 </div>
 {% endblock %}   
@@ -30,7 +30,7 @@
     </div>
     <div class="flex_between">
         <a class="btn_back" href="{{ path('account.profil') }}">Retour</a>
-        <button class="btn_save">{{ button_label|default('Sauvegarder') }}</button>
+        <button class="btn_primary">{{ button_label|default('Sauvegarder') }}</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

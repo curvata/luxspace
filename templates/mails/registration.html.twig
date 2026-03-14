@@ -1,8 +1,19 @@
 {% extends 'mails/mail.html.twig' %}
 
 {% block body %}
-<p>Bonjour {{ content.lastname }} {{ content.firstname }},<br></br>
-bienvenue chez Luxspace, découvrez sans plus tarder nos <a href="{{ path('destination.index') }}">destinations incroyables !</a></p><br>
-<a class="btn_primary" href="{{ url('login') }}">Accéder à mon compte</a>
-<img src="{{ absolute_url(asset('images/logo.png')) }}">
+    <p style="margin:0 0 8px; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#d4a843;">
+        ✦ Bienvenue chez LUXSPACE
+    </p>
+
+    <h1 style="margin:0 0 24px; font-size:22px; font-weight:700; color:#ffffff; line-height:1.3;">
+        Bonjour {{ content.firstname }},
+    </h1>
+
+    <p style="margin:0 0 24px; font-size:15px; color:#b0b0cc; line-height:1.7;">
+        Votre compte LUXSPACE a bien été créé. Vous pouvez dès maintenant explorer nos destinations et réserver votre prochain voyage spatial.
+    </p>
+
+    <a href="{{ url('destination.index') }}" style="display:inline-block; padding:12px 24px; background:linear-gradient(135deg,#b8902e,#d4a843); color:#0a0a16; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; border-radius:6px;">
+        Découvrir les destinations
+    </a>
 {% endblock %}

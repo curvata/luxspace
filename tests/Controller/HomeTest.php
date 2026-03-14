@@ -17,16 +17,16 @@ class HomeTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', "LA MANIÈRE LA PLUS SÛRE");
+        $this->assertSelectorTextContains('h1', "La manière la plus sûre");
         $this->assertCount(1, $crawler->filter('.search_bar'));
         $this->assertCount(1, $crawler->filter('.topbar'));
         $this->assertCount(1, $crawler->filter('.topbar_menu'));
-        $this->assertSelectorTextContains('h2', "LES DESTINATIONS POPULAIRES");
+        $this->assertSelectorTextContains('h2', "Destinations populaires");
         $this->assertLessThanOrEqual(4, $crawler->filter('article')->count());
         $this->assertSelectorTextContains('button', "RECHERCHE");
         $this->assertEquals(
             1,
-            $crawler->filter('.menu_link:contains("CONNEXION")')->count());
+            $crawler->filter('.menu_link:contains("Connexion")')->count());
     }
 
     public function testHomeUserOnline()
@@ -43,7 +43,7 @@ class HomeTest extends WebTestCase
         
         $this->assertEquals(
             1,
-            $crawler->filter('.menu_link:contains("DECONNEXION")')->count());
+            $crawler->filter('.menu_link:contains("Déconnexion")')->count());
         $this->assertEquals(
             1,
             $crawler->filter('.menu_link:contains("UnPrenom")')->count());

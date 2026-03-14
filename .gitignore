@@ -2,7 +2,7 @@
 ###> symfony/framework-bundle ###
 .env.local
 /public/images/location/
-/public/images/_MACOSX/
+/public/images/__MACOSX/
 .env.local.php
 .env.*.local
 /config/secrets/prod/prod.decrypt.private.php

@@ -17,9 +17,8 @@ class SearchFlightTest extends WebTestCase
         $crawler = $client->request('GET', '/recherche-vols');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', "Choisissez vos vols de départ et de retour");
-        $this->assertEquals(
-            2,
-            $crawler->filter('p:contains("Aucun vol de retour disponible, veuillez choisir une autre date.")')->count());
+        $this->assertEquals(1, $crawler->filter('p:contains("Aucun vol aller disponible, veuillez choisir une autre date.")')->count());
+        $this->assertEquals(1, $crawler->filter('p:contains("Aucun vol de retour disponible, veuillez choisir une autre date.")')->count());
     }
 
     public function testSearchFlightWithValidSearchData()

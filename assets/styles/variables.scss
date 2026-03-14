@@ -1,25 +1,52 @@
 :root {
-    --black:rgb(14, 14, 14);
-    --grey: rgb(209, 209, 209);
-    --red: #ee2436;
-    --red-hover: #db2130;
-    --blue: #00a3df;
-    --blue-hover: #0196cc;
-    --green: #6ab04c;
-    --green-hover: #5d9e41;
+    /* Backgrounds */
+    --bg: #06060f;
+    --bg-surface: #0e0e1c;
+    --bg-surface-2: #141428;
+    --bg-surface-3: #1c1c36;
+
+    /* Borders */
+    --border: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(212, 168, 67, 0.45);
+
+    /* Brand – Gold */
+    --gold: #d4a843;
+    --gold-light: #f0c855;
+    --gold-dark: #b8922e;
+    --gold-glow: rgba(212, 168, 67, 0.18);
+
+    /* Accent */
+    --blue: #4f8ef7;
+    --blue-hover: #6ba3f8;
+    --green: #4ecb71;
+    --green-hover: #45b865;
+    --red: #ff4d6d;
+    --red-hover: #e03c5a;
     --orange: #f0932b;
-    --orange-hover: #e78d25;
+    --orange-hover: #e07a1a;
 
-    --text: rgb(26, 26, 26);
+    /* Text */
+    --text: #e8e8f2;
+    --text-muted: #6868a0;
+    --text-light: #a8a8cc;
+
+    /* Font */
     --font-size: 15px;
-    --font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
-    --padding-content: 30px;
-    --margin-content: 30px;
+    /* Spacing */
+    --padding-content: 2rem;
+    --margin-content: 2rem;
+    --margin-top: 2.5rem;
+    --margin-bottom: 2.5rem;
 
-    --margin-top: 30px;
-    --margin-bottom: 30px;
-
-    --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);   
-    --br: 2px;
+    /* Effects */
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.65);
+    --shadow-glow: 0 0 30px rgba(212, 168, 67, 0.12);
+    --br: 10px;
+    --br-sm: 6px;
+    --br-lg: 16px;
+    --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
 }

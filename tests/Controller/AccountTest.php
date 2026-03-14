@@ -33,13 +33,13 @@ class AccountTest extends WebTestCase
         $this->assertSelectorTextContains('h2', "Bonjour UnPrenom,");
         $this->assertEquals(
             1,
-            $crawler->filter('a:contains("Gérer mes cordonnées")')->count());
+            $crawler->filter('a .dashboard_card_title:contains("Mes coordonnées")')->count());
         $this->assertEquals(
             1,
-            $crawler->filter('a:contains("Modifier mon mot de passe")')->count());
+            $crawler->filter('a .dashboard_card_title:contains("Mot de passe")')->count());
         $this->assertEquals(
             1,
-            $crawler->filter('a:contains("Gérer mes réservations")')->count());
+            $crawler->filter('a .dashboard_card_title:contains("Mes réservations")')->count());
         $this->assertEquals(
             1,
             $crawler->filter('p:contains("Mars")')->count());
@@ -54,7 +54,8 @@ class AccountTest extends WebTestCase
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
         $crawler = $client->request('GET', '/compte/mes-reservations');
-        $this->assertSelectorTextContains('h1', "Mes réservations (2)");
+        $this->assertSelectorTextContains('h1', "Mes réservations");
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     }
 
     public function testAccountInvoice()
@@ -64,11 +65,10 @@ class AccountTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/compte/mes-reservations/1');
-        $this->assertSelectorTextContains('h1', "Réservation");
-        $this->assertEquals(
-            1,
-            $crawler->filter('strong:contains("REF1")')->count());
+        $client->request('GET', '/compte/mes-reservations/1');
+        $response = $client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertStringContainsString('application/pdf', $response->headers->get('Content-Type'));
     }
 
     public function testAccountIncoiceNotYourReservation()

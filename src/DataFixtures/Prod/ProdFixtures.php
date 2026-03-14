@@ -11,12 +11,18 @@ use App\Entity\User;
 use DateInterval;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
 use ZipArchive;
 
-class ProdFixtures extends Fixture
+class ProdFixtures extends Fixture implements FixtureGroupInterface
 {
+    public static function getGroups(): array
+    {
+        return ['prod'];
+    }
+
        
     /**
      * Créer un vol de départ
@@ -188,7 +194,7 @@ class ProdFixtures extends Fixture
         $manager->flush();
 
         $now = new DateTime();
-        $nextYear = (new DateTime())->add(new DateInterval('P1Y'));
+        $nextYear = (new DateTime())->add(new DateInterval('P10Y'));
 
         $ref=1000;
         

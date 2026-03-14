@@ -1,34 +1,38 @@
-
 .flex {
     display: flex;
     flex-wrap: wrap;
+
     &_start {
         @extend .flex;
         justify-content: flex-start;
     }
+
     &end {
         @extend .flex;
         justify-content: flex-end;
     }
+
     &_column {
         @extend .flex;
         flex-direction: column;
     }
-    
+
     &_between {
         @extend .flex;
         justify-content: space-between;
+        align-items: center;
     }
-    
+
     &_around {
         @extend .flex;
         justify-content: space-around;
     }
-    
+
     &_center {
         @extend .flex;
         justify-content: center;
     }
+
     &_align_center {
         @extend .flex;
         align-items: center;
@@ -38,25 +42,34 @@
 .left_zone {
     width: 50%;
     padding-right: 1rem;
+
     img {
         width: 100%;
         object-fit: cover;
+        border-radius: var(--br);
     }
 }
 
 .right_zone {
     width: 50%;
 }
-  
+
 .content {
     flex: 1 0 auto;
 }
 
 main {
     height: 100%;
-    margin-top: var(--margin-top);
-    margin-bottom: var(--margin-bottom);
-    padding: 1rem;
+    margin-top: 4rem;      /* header → premier élément */
+    margin-bottom: 7rem;   /* dernier élément → footer */
+    padding: 0 1rem;
+
+    /* espacement uniforme entre toutes les sections */
+    > section + section,
+    > section + div,
+    > div + section {
+        margin-top: 5rem;
+    }
 }
 
 .hidden {
@@ -68,21 +81,22 @@ main {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-
+    padding: 0 1.5rem;
 }
 
 .middle {
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    width: 60%;
-    font-size: 1rem;
-    border-radius: var(--br);
-    box-shadow: var(--shadow);
-    background-color: white;
-    padding: var(--padding-content);
+    width: 56%;
+    border-radius: var(--br-lg);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    padding: var(--padding-content) calc(var(--padding-content) * 1.5);
 
     p {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
     }
 
     .form {
@@ -93,7 +107,18 @@ main {
     .after_login {
         display: flex;
         justify-content: space-between;
-        margin-top: 1rem;
+        margin-top: 1.2rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border);
+
+        a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+
+            &:hover {
+                color: var(--gold);
+            }
+        }
     }
 }
 
@@ -102,49 +127,38 @@ main {
         width: 100%;
         padding: 0;
     }
-    
+
     .right_zone {
         width: 100%;
     }
+
     .middle {
-        width: 100%
+        width: 100%;
+        padding: 1.5rem;
     }
 }
 
 @media screen and (min-width: 800px) and (max-width: 1000px) {
     .middle {
-        width: 80%
+        width: 78%;
     }
 }
 
 @media screen and (max-width: 500px) {
-        .flex {
-            justify-content: center;
-            form {
-                margin-left: 0;
-            }
+    .flex {
+        justify-content: center;
+
+        form {
+            margin-left: 0;
         }
-        .flex_between {
-            flex-direction: column;
-            justify-content: center;
+    }
+
+    .flex_between {
+        flex-direction: column;
+        gap: 0.8rem;
+
         .btn_back {
             order: 1;
-        }
-    } 
-     
-}
-
-@media screen and (max-width: 500px) {
-    .flex_between {
-        justify-content: center;
-        .flex {
-            form {
-                margin-left: 0;
-            }
-            justify-content: center;
-        }
-        .btn_back{
-            order:1;
         }
     }
 }

@@ -1,8 +1,35 @@
 {% extends 'mails/mail.html.twig' %}
 
 {% block body %}
-Bonjour {{ content.client.lastname }} {{ content.client.firstname }},<br></br>
-Nous avons bien annulé la réservation n° <strong>{{ content.reference }}</strong>, 
-le remboursement a bien été effectué et vous devriez le recevoir sur votre compte d'ici peu.<br><br>
-À bientôt chez Luxspace.
+    <!-- Eyebrow -->
+    <p style="margin:0 0 8px; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#d4a843;">
+        ✦ Confirmation de remboursement
+    </p>
+
+    <h1 style="margin:0 0 24px; font-size:22px; font-weight:700; color:#ffffff; line-height:1.3;">
+        Bonjour {{ content.client.firstname }},
+    </h1>
+
+    <p style="margin:0 0 16px; font-size:15px; color:#b0b0cc; line-height:1.7;">
+        Votre demande de remboursement a bien été prise en compte.
+    </p>
+
+    <!-- Reservation reference -->
+    <table cellpadding="0" cellspacing="0" style="margin:24px 0; width:100%; background-color:rgba(255,77,109,0.07); border-left:3px solid rgba(255,77,109,0.6); border-radius:4px;">
+        <tr>
+            <td style="padding:16px 20px;">
+                <p style="margin:0 0 4px; font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#ff8099;">Réservation annulée</p>
+                <p style="margin:0; font-size:18px; font-weight:700; color:#ffffff;">{{ content.reference }}</p>
+            </td>
+        </tr>
+    </table>
+
+    <p style="margin:0 0 32px; font-size:14px; color:#b0b0cc; line-height:1.7;">
+        Le remboursement a bien été effectué et vous devriez le recevoir sur votre compte d'ici peu.<br><br>
+        À bientôt chez LUXSPACE.
+    </p>
+
+    <a href="{{ url('account.index') }}" style="display:inline-block; padding:12px 24px; background:linear-gradient(135deg,#b8902e,#d4a843); color:#0a0a16; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; border-radius:6px;">
+        Mon compte
+    </a>
 {% endblock %}

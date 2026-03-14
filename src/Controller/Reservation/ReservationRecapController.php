@@ -61,19 +61,19 @@ class ReservationRecapController extends AbstractController
                                 if (isset($passenger['lastname']) && isset($passenger['firstname'])) {
                                     $validator = Validation::createValidator();
                                     $inputs = [
-                                            'firstname' => $passenger['lastname'],
-                                            'lastname' => $passenger['firstname']
+                                            'firstname' => $passenger['firstname'],
+                                            'lastname' => $passenger['lastname']
                                     ];
                                     $constraints = new Collection(
                                         [
                                         'firstname' => [
                                             new Length(['min' => 3, 'max' => 30]),
-                                            new Regex('/^[a-zA-Z\s]+$/'),
+                                            new Regex('/^[\pL\-\s]+$/u'),
                                             new NotBlank()
                                         ],
                                         'lastname' => [
                                             new Length(['min' => 3, 'max' => 30]),
-                                            new Regex('/^[a-zA-Z\s]+$/'),
+                                            new Regex('/^[\pL\-\s]+$/u'),
                                             new NotBlank()
                                         ]
                                         ]
@@ -97,6 +97,11 @@ class ReservationRecapController extends AbstractController
                     }
                 }
             }
+            if (!isset($reservation)) {
+                $this->addFlash('error', 'Une erreur est survenue lors de la création de votre réservation.');
+                return new RedirectResponse($request->server->get('HTTP_REFERER'));
+            }
+
             return $this->render(
                 'reservation/summary.html.twig',
                 ['reservation' => $reservation]

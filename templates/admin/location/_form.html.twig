@@ -19,7 +19,35 @@
         {{ form_row(form.slug) }}
     </div>
 </div>
-{{ form_row(form.description) }}
+{{ form_label(form.description) }}
+<div id="quill-editor" style="min-height:220px; margin-bottom:1rem;"></div>
+{{ form_widget(form.description, {'attr': {'id': 'location_description', 'style': 'display:none'}}) }}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow',
+        placeholder: 'Description de la destination…',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline'],
+                [{ 'header': [2, 3, false] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['clean']
+            ]
+        }
+    });
+
+    var textarea = document.getElementById('location_description');
+    if (textarea.value) {
+        quill.root.innerHTML = textarea.value;
+    }
+
+    textarea.closest('form').addEventListener('submit', function () {
+        textarea.value = quill.root.innerHTML;
+    });
+});
+</script>
 {{ form_rest(form) }}
 <div class="flex_between">
     <a class="btn_back"href="{{ path('location.index') }}">Retour</a>

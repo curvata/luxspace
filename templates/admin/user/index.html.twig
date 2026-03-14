@@ -7,8 +7,8 @@
 
 {% block adminContent %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/passenger.png')}}" alt="Icône d'un utilisateur"></img>
-    <h1>Utilisateurs ({{ users.totalItemCount }})</h1>
+    <i class="fa-solid fa-users ico_fa"></i>
+    <h1>Utilisateurs <span class="count_badge">{{ users.totalItemCount }}</span></h1>
 </div>
 <table>
     <thead>

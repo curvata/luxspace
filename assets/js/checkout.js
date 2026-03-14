@@ -1,23 +1,29 @@
 // Processus de paiement Stripe
 
-var stripe = Stripe("YOUR STRIPE KEY");
 var checkoutButton = document.getElementById("checkout-button");
+var stripe = Stripe(checkoutButton.getAttribute("data-stripe-key"));
+
 checkoutButton.addEventListener("click", function () {
-  fetch("/paiement/"+checkoutButton.getAttribute('data-reference'), {
+  fetch("/paiement/" + checkoutButton.getAttribute('data-reference'), {
     method: "POST",
   })
     .then(function (response) {
       return response.json();
     })
-    .then(function (session) {
-      return stripe.redirectToCheckout({ sessionId: session.id });
+    .then(function (data) {
+      if (data.erreur) {
+        alert("Erreur : " + data.erreur);
+        return;
+      }
+      return stripe.redirectToCheckout({ sessionId: data.id });
     })
     .then(function (result) {
-      if (result.error) {
+      if (result && result.error) {
         alert(result.error.message);
       }
     })
     .catch(function (error) {
-      console.error("Error:", error);
+      console.error("Erreur Stripe:", error);
+      alert("Une erreur est survenue, veuillez réessayer.");
     });
 });

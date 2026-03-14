@@ -51,66 +51,116 @@ import {
     Tooltip
   );
 var ctx = document.getElementById('myChart');
- if (ctx) {
-     ctx = ctx.getContext('2d')
-    // Dashboard de l'administration 
+if (ctx) {
+    const gold      = '#d4a843';
+    const violet    = '#7c6af7';
+    const gridColor = 'rgba(255, 255, 255, 0.05)';
+    const textMuted = '#6868a0';
+    const textLight = '#a8a8cc';
 
-    let config = {
+    function gradientGold(chart) {
+        const g = chart.ctx.createLinearGradient(0, 0, 0, chart.chartArea ? chart.chartArea.bottom : 300);
+        g.addColorStop(0, 'rgba(212, 168, 67, 0.25)');
+        g.addColorStop(1, 'rgba(212, 168, 67, 0)');
+        return g;
+    }
+    function gradientViolet(chart) {
+        const g = chart.ctx.createLinearGradient(0, 0, 0, chart.chartArea ? chart.chartArea.bottom : 300);
+        g.addColorStop(0, 'rgba(124, 106, 247, 0.2)');
+        g.addColorStop(1, 'rgba(124, 106, 247, 0)');
+        return g;
+    }
+
+    const chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-            datasets: [{
-                label: 'Clients',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 3
-            },
-            {
-                label: 'Réservations',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 3
-            }],
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+            datasets: [
+                {
+                    label: 'Inscriptions',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    borderColor: gold,
+                    borderWidth: 2,
+                    pointBackgroundColor: gold,
+                    pointBorderColor: '#0e0e1c',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: function(context) {
+                        return gradientGold(context.chart);
+                    }
+                },
+                {
+                    label: 'Réservations',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    borderColor: violet,
+                    borderWidth: 2,
+                    pointBackgroundColor: violet,
+                    pointBorderColor: '#0e0e1c',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: function(context) {
+                        return gradientViolet(context.chart);
+                    }
+                }
+            ]
         },
-
         options: {
             responsive: true,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textLight,
+                        font: { family: 'DM Sans', size: 13 },
+                        usePointStyle: true,
+                        pointStyleWidth: 8,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#0e0e1c',
+                    borderColor: 'rgba(255,255,255,0.08)',
+                    borderWidth: 1,
+                    titleColor: textLight,
+                    bodyColor: '#e8e8f2',
+                    padding: 12,
+                    cornerRadius: 8,
+                    titleFont: { family: 'DM Sans', size: 12, weight: '600' },
+                    bodyFont: { family: 'DM Sans', size: 13 }
+                }
+            },
             scales: {
+                x: {
+                    grid: { color: gridColor },
+                    ticks: { color: textMuted, font: { family: 'DM Sans', size: 12 } },
+                    border: { color: gridColor }
+                },
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grid: { color: gridColor },
+                    ticks: {
+                        color: textMuted,
+                        font: { family: 'DM Sans', size: 12 },
+                        stepSize: 1,
+                        precision: 0
+                    },
+                    border: { color: gridColor }
                 }
             }
         }
-    };
-    var myChart = new Chart(ctx, config);
+    });
 
     fetch('/admin/graph')
-    .then((response) => { return response.json(); })
-    .then(response => { 
-        myChart.config.data.datasets[0].data = Object.values(response.user);
-        myChart.config.data.datasets[1].data = Object.values(response.reservation);
-        myChart.update();
-    });
- }
+        .then(r => r.json())
+        .then(response => {
+            chartInstance.config.data.datasets[0].data = Object.values(response.user);
+            chartInstance.config.data.datasets[1].data = Object.values(response.reservation);
+            chartInstance.update();
+        });
+}

@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /compte
+Disallow: /reservation
+Disallow: /list-days-no-flights/
+
+Allow: /

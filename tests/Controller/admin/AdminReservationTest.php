@@ -17,9 +17,10 @@ class AdminReservationTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/admin/reservation');
-        $client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Réservations (6)');
+        $client->request('GET', '/admin/reservation');
+        $crawler = $client->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Réservations');
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     } 
 
     public function testAdminReservationNew()

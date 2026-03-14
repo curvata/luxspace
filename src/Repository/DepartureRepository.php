@@ -51,7 +51,7 @@ class DepartureRepository extends ServiceEntityRepository
                 [
                 'destination_id' => $location->getId(),
                 'date1' => (new DateTime()),
-                'date2' => (new DateTime())->modify('+1 years')->format('Y-m-d'),
+                'date2' => (new DateTime())->modify('+10 years')->format('Y-m-d'),
                 ]
             )
             ->getQuery()

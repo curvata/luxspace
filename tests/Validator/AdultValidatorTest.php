@@ -24,7 +24,7 @@ class AdultValidatorTest extends TestCase
     {
         $constraint = new Password();
         $validator = new AdultValidator();
-        $this->expectExceptionMessage('App\Validator\AdultConstraint", "App\Validator\Password" given');
+        $this->expectExceptionMessage('App\Validator\Adult", "App\Validator\Password" given');
         $validator->validate(new DateTime(), $constraint);
     }
 

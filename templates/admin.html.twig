@@ -4,24 +4,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}LUXSPACE - Administration{% endblock %}</title>
-        <link rel="icon" href="{{ asset('./images/favicon.ico') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('./images/logo_s.png') }}"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         {% block description %}
-            <meta name="description" content="Administration de Luxspace" />
+            <meta name="description" content="Administration de LUXSPACE" />
         {% endblock %}
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
-            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {{ encore_entry_script_tags('chartjs') }}
+            <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
         {% endblock %}
     </head>
     <body>
         <header>
             <div class="container">   
                 <nav class="topbar">
-                    <a href="{{ path('home') }}"><img class="topbar_logo" src="{{ asset('./images/logo.png')}}" alt="logo de Luxspace"></img></a>
+                    <a href="{{ path('home') }}"><img class="topbar_logo" src="{{ asset('./images/logo.png')}}" alt="logo de LUXSPACE"></img></a>
                     <ul class="topbar_menu">
                         <li><a class="menu_link {{ isActive('admin')? 'active' }}" href="{{ path('admin')}}">SOMMAIRE</a></li>
                         <li><a class="menu_link {{ isActive('location')? 'active' }}" href="{{ path('location.index')}}">DESTINATIONS</a></li>
@@ -31,8 +37,9 @@
                         <li><a class="menu_link {{ isActive('reservation')? 'active' }}" href="{{ path('reservation.index')}}">RÉSERVATIONS</a></li>
                     </ul>
                     <div class="topbar_btn_menu_mobile">
-                        <div></div>
-                        <div></div>
+                        <svg class="burger_star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1 L13.8 10.2 L23 12 L13.8 13.8 L12 23 L10.2 13.8 L1 12 L10.2 10.2 Z"/>
+                        </svg>
                     </div>
                 </nav>
             </div>
@@ -51,13 +58,13 @@
         </div>
         <footer>
             <div class="container">
-                 <section class="content">
-                    <p><img width="100" src="{{ asset('./images/logo.png') }}"></img> &#10072; <a href="{{ path('about')}}">C'est quoi ?</a> &#10072; Développé par <a href="https://menezes.be">Menezes</a></p>
-                    <div class="social">
-                        <img src="{{ asset('./images/icons/facebook.png')}}"></img>
-                        <img src="{{ asset('./images/icons/instagram.png')}}"></img>
-                        <img src="{{ asset('./images/icons/twitter.png')}}"></img>
-                    </div>
+                <section class="content">
+                    <img width="80" src="{{ asset('./images/logo.png') }}" alt="LUXSPACE">
+                    <nav class="footer_nav">
+                        <a href="{{ path('about') }}"><i class="fa-solid fa-circle-info"></i> À propos</a>
+                        <a href="https://github.com/curvata/luxspace" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </nav>
+                    <p class="footer_credit">Développé par <a href="https://cancelinha.lu" target="_blank">Cancelinha</a></p>
                 </section>
             </div>
         </footer>

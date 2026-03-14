@@ -21,13 +21,17 @@
         <div class="recap_content">
             <section class="flights">
                     <article class="flight">
-                        <div class="ico"><img src="{{ asset('./images/icons/departure.png') }}" alt="Icône d'une fusée qui décolle"></img><h2>Vol aller</h2></div>
+                        <div class="ico"><i class="fa-solid fa-rocket ico_fa dep"></i><h2>Vol aller</h2></div>
                         <div class="card">
                             <div class="card_image">
-                                <img src="{{ asset('images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{ reservation.departure.destination.title }}">
+                                <img src="{{ asset('images/location/' ~ reservation.departure.destination.pictureHeader) }}" alt="{{ reservation.departure.destination.title }}" loading="lazy">
                             </div>
                             <div class="card_title">
-                                <h3>LUXEMBOURG <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png') }}" alt="Icône d'une fusée"></img> {{ reservation.departure.destination|upper }}</h3>
+                                <div class="card_route">
+                                    <span class="card_route__city">LUXEMBOURG</span>
+                                    <span class="card_route__sep">✦</span>
+                                    <span class="card_route__city">{{ reservation.departure.destination|upper }}</span>
+                                </div>
                             </div>
                             <div class="card_content">
                                 {{ include ("reservation/parts/departure.html.twig", {'departure': reservation.departure}) }}
@@ -35,13 +39,17 @@
                         </div>
                     </article>
                     <article class="flight">
-                        <div class="ico"><img src="{{ asset('./images/icons/returned.png') }}" alt="Icône d'une fusée qui retourne atterit"></img><h2>Vol retour</h2></div>
+                        <div class="ico"><i class="fa-solid fa-rocket ico_fa ret"></i><h2>Vol retour</h2></div>
                         <div class="card">
                             <div class="card_image">
-                                <img src="{{ asset('images/location/' ~ reservation.returned.ffrom.pictureHeader) }}" alt="{{ reservation.returned.ffrom.title }}">
+                                <img src="{{ asset('images/location/' ~ reservation.returned.ffrom.pictureHeader) }}" alt="{{ reservation.returned.ffrom.title }}" loading="lazy">
                             </div>
                             <div class="card_title">
-                                <h3>{{ reservation.returned.ffrom|upper }} <img class="ico_booking" src="{{ asset('./images/icons/rocket_flight.png') }}" alt="Icône d'une fusée"></img> LUXEMBOURG</h3>
+                                <div class="card_route">
+                                    <span class="card_route__city">{{ reservation.returned.ffrom|upper }}</span>
+                                    <span class="card_route__sep">✦</span>
+                                    <span class="card_route__city">LUXEMBOURG</span>
+                                </div>
                             </div>
                             <div class="card_content">
                                 {{ include ("reservation/parts/return.html.twig", {'return': reservation.returned}) }}
@@ -50,11 +58,11 @@
                     </article>
             </section>
             <section class="summary_reservation">
-                <div class="ico"><img src="{{ asset('./images/icons/details.png')}}"></img><h2>Détails</h2></div>
+                <div class="ico"><i class="fa-solid fa-list-ul ico_fa"></i><h2>Détails</h2></div>
                 <div class="item">
                     {% include "reservation/parts/price.html.twig" %}
                     <div class="form-group">
-                        <a id="checkout-button" data-reference="{{reservation.id}}" class="btn_save full">Payer</a>
+                        <a id="checkout-button" data-reference="{{ reservation.id }}" data-stripe-key="{{ app.request.server.get('STRIPE_PUBLIC') }}" class="btn_primary btn_cta full">Payer</a>
                         <p>&#10075; Pour procéder à un paiement, vous pouvez utiliser les données suivantes: "4242 4242 4242 4242", 3 chiffres aléatoires pour le CVC et une date dans le futur. &#10076;</p>
                     </div>
                 </div>

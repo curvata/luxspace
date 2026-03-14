@@ -1,25 +1,54 @@
-# luxspace
+![LUXSPACE](/.github/intro.png)
 
-Cette application web de réservation de vols pour l'espace est un projet fictif réalisé dans le cadre de mon portfolio personnel. 
+# LUXSPACE ✦ Réservation de vols spatiaux
 
-Procédure d'installation du projet:
+Application web fictive de réservation de vols pour l'espace, réalisée dans le cadre d'un portfolio personnel.
 
-1. Récupérer le dépôt git ```git clone https://github.com/curvata/luxspace.git```
-2. Installation des dépendances php ```composer update```
-3. Renseigner les informations suivantes: MY_MAIL, MY_DOMAIN, STRIPE_PRIVATE, MAILER_DSN et DATABASE_URL dans le fichier .env
-4. Renseigner votre clé public stripe dans le fichier assets/js/checkout.js
-5. Installation des dépendances js ```npm install```
-6. Compilation des assets ```npm run build```
-7. Executer la migration ```php bin/console doctrine:migrations:migrate```
-8. Mise en place des fixtures ```php bin/console doctrine:fixtures:load --group=ProdFixtures```
+---
 
-Procédure pour lancer les tests
+## Installation
 
-1. Renseigner le DATABASE_URL dans le fichier .env.test
-2. Lancer les tests ```php bin/phpunit```
-3. Lancer le code coverage ```XDEBUG_MODE=coverage bin/phpunit --coverage-html coverage```
+**1. Cloner le dépôt**
+```bash
+git clone https://github.com/curvata/luxspace.git
+cd luxspace
+```
 
-CodeSniffer
+**2. Installer les dépendances**
+```bash
+composer install
+npm install
+```
 
-1. ```php vendor/bin/phpcbf --standard=PSR2  --exclude=Generic.Files.LineLength src/```
-1. ```php vendor/bin/phpccs --standard=PSR2  --exclude=Generic.Files.LineLength src/```
+**3. Configurer l'environnement**
+
+Créer un fichier `.env.local` à la racine :
+```dotenv
+APP_SECRET=votre_secret
+DATABASE_URL="mysql://user:password@127.0.0.1:3306/luxspace?serverVersion=8.3.0"
+MAILER_DSN=smtp://localhost:1025
+MY_MAIL=noreply@votredomaine.com
+MY_DOMAIN=http://localhost:8000
+STRIPE_PRIVATE=sk_test_...
+STRIPE_PUBLIC=pk_test_...
+```
+
+**4. Compiler les assets**
+```bash
+npm run build
+```
+
+**5. Base de données**
+```bash
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load --group=ProdFixtures
+```
+
+## Tests
+
+```bash
+php bin/phpunit
+
+# Code coverage
+XDEBUG_MODE=coverage php bin/phpunit --coverage-html coverage
+```

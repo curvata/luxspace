@@ -1,24 +1,24 @@
-<table>
+<table class="table-info">
     <tbody>
         <tr>
             <td>Référence:</td>
-            <td>{{ return.reference }}</td>
+            <td><span class="flight_ref">{{ return.reference }}</span></td>
         </tr>
         <tr>
             <td>Fusée:</td>
-            <td>{{ return.rocket }}</td>
+            <td><span class="list_rocket_name">{{ return.rocket }}</span></td>
         </tr>
         <tr>
             <td>Date:</td>
-            <td>{{ return.date|date('d-m-Y') }}</td>
+            <td><span class="list_date">{{ return.date|format_date('long', locale='fr') }}</span></td>
         </tr>
         <tr>
             <td>Heure:</td>
-            <td>{{ return.date|date('H:i:s') }}</td>
+            <td><span class="list_time">{{ return.date|date('H:i') }}</span></td>
         </tr>
-         <tr>
+        <tr>
             <td>Durée:</td>
-            <td>{{ return.duration }} heures</td>
+            <td><span class="list_hour">{{ return.duration }}h de vol</span></td>
         </tr>
         <tr>
             <td>Prix:</td>

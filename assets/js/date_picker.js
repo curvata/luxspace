@@ -15,29 +15,26 @@ let picker2;
 if (destination) {
     const departure = document.querySelector('#departure');
     const returned = document.querySelector('#returned');
-    let selected = document.querySelector('option[selected]');
-
+    const isHomepage = document.querySelector('.homepage_header') !== null;
+    const isDestinationPage = document.querySelector('.product_show') !== null;
     let config = {
         format: 'dd-mm-yyyy',
         minDate: new Date(),
-        maxDate: new Date(new Date().getFullYear() +1, new Date().getMonth(), new Date().getDate()),
+        maxDate: new Date(new Date().getFullYear() +10, new Date().getMonth(), new Date().getDate()),
         clearBtn: true,
         todayHighlight: true,
-        language: 'fr'
+        language: 'fr',
+        orientation: (isHomepage || isDestinationPage) ? 'top' : 'bottom'
     }
     picker1 = new Datepicker(departure, config); 
     picker2 = new Datepicker(returned, config); 
 
-    if (selected) {
-        id = selected.value;
-    } else {
-        id = destination.firstChild.value;
-    }
+    id = destination.value;
     destination.addEventListener('change', e => {
         id = e.target.value;
         getListNoFlights(id);
     });
-    getListNoFlights(id);
+    if (id) getListNoFlights(id);
 }
 
 function getListNoFlights(id) {

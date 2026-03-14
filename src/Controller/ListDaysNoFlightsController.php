@@ -24,7 +24,7 @@ class ListDaysNoFlightsController extends AbstractController
     ): JsonResponse {
         $location = $locationRepo->find($id);
         if ($location) {
-            for ($i = 0; $i <= 365; $i++) {
+            for ($i = 0; $i <= 3650; $i++) {
                 $date = (new DateTime())->modify('+ '. $i . ' day');
                 $flights ['departures'][$date->format("ymd")] = $date->format("d-m-Y");
             }

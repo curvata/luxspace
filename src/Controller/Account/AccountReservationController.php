@@ -4,6 +4,7 @@ namespace App\Controller\Account;
 
 use App\Class\Message;
 use App\Class\MyMailer;
+use App\Class\PdfGenerator;
 use App\Entity\Reservation;
 use App\Repository\PassengerRepository;
 use App\Repository\ReservationRepository;
@@ -53,13 +54,15 @@ class AccountReservationController extends AbstractController
      * Affichage de la facture pour la réservation concernée
      */
     #[Route('/compte/mes-reservations/{id}', name: 'account.reservations.incoice', methods: ['GET'])]
-    public function show(Reservation $reservation): Response|RedirectResponse
+    public function show(Reservation $reservation, PdfGenerator $pdf): Response|RedirectResponse
     {
         if ($this->getUser() === $reservation->getClient()) {
-            return $this->render(
+            $html = $this->renderView(
                 'account/reservation/invoice.html.twig',
                 ['reservation' => $reservation]
             );
+
+            return $pdf->generate($html, 'facture-' . $reservation->getReference() . '.pdf');
         }
 
         return $this->redirectToRoute('account.reservations');
@@ -74,19 +77,6 @@ class AccountReservationController extends AbstractController
         if ($this->isCsrfTokenValid('refund', $request->get('token'))
             && $this->getUser() === $reservation->getClient() && $reservation->getDeparture()->getDate() > (new DateTime())
         ) {
-            try {
-                Stripe::setApiKey($request->server->get('STRIPE_PRIVATE'));
-                $session = Session::retrieve($reservation->getStripeReference());
-                Refund::create(
-                    [
-                    'payment_intent' => $session->payment_intent,
-                    ]
-                );
-            } catch (Exception $e) {
-                $this->addFlash('error', 'Erreur lors du remboursement de la réservation n° ' . $reservation->getReference());
-                return $this->redirectToRoute('account.reservations');
-            }
-
             $departure = $reservation->getDeparture();
             $return = $reservation->getReturned();
             $nbrPassengers = count($reservation->getPassengers());
@@ -163,19 +153,19 @@ class AccountReservationController extends AbstractController
     {
         $validator = Validation::createValidator();
         $inputs = [
-                'firstname' => $passenger['lastname'],
-                'lastname' => $passenger['firstname']
+                'firstname' => $passenger['firstname'],
+                'lastname' => $passenger['lastname']
         ];
         $constraints = new Collection(
             [
             'firstname' => [
                 new Length(['min' => 3, 'max' => 30]),
-                new Regex('/^[a-zA-Z\s]+$/'),
+                new Regex('/^[\pL\-\s]+$/u'),
                 new NotBlank()
             ],
             'lastname' => [
                 new Length(['min' => 3, 'max' => 30]),
-                new Regex('/^[a-zA-Z\s]+$/'),
+                new Regex('/^[\pL\-\s]+$/u'),
                 new NotBlank()
             ]
             ]

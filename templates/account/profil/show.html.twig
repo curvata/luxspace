@@ -6,7 +6,7 @@
 {% endblock %}
 {% block title_cat %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/user.png') }}" alt="Icône d'un utilisateur"></img>
+    <i class="fa-solid fa-address-card ico_fa"></i>
     <h1>Profil</h1>
 </div>
 {% endblock %}     
@@ -54,6 +54,6 @@
 </table>
 <div class="flex_between">
     <a class="btn_back" href="{{ path('account.index') }}">Retour</a>
-    <a class="btn_edit" href="{{ path('account.profil.edit', {'id': app.user.id}) }}">Modifier mes cordonnées</a>
+    <a class="btn_primary" href="{{ path('account.profil.edit', {'id': app.user.id}) }}">Modifier mes cordonnées</a>
 </div>
 {% endblock %}

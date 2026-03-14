@@ -6,7 +6,7 @@
 {% endblock %}
 {% block title_cat %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/password.png') }}" alt="Icône d'un cadenas"></img>
+    <i class="fa-solid fa-key ico_fa"></i>
     <h1>Modifier mon mot de passe</h1>
 </div>
 {% endblock %} 
@@ -16,7 +16,7 @@
     {{ form_row(form.password) }}
     <div class="flex_between">
         <a class="btn_back"href="{{ path('account.index') }}">Retour</a>
-        <button class="btn_save" type="submit">Sauvegarder</button>
+        <button class="btn_primary" type="submit">Sauvegarder</button>
     </div>
 {{ form_end(form) }}
 {% endblock %}

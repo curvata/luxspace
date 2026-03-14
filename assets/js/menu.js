@@ -7,15 +7,24 @@ export function menuStart()
     let body = document.querySelector('body');
     let modal = document.createElement('div');
 
+    function closeMenu() {
+        if (!modal.classList.contains('menu_full_window')) return;
+        document.documentElement.style.overflow = 'visible';
+        btn_burger.classList.remove('topbar_open');
+        modal.classList.add('menu_closing');
+        modal.addEventListener('animationend', () => {
+            modal.classList.remove('menu_full_window');
+            modal.classList.remove('menu_closing');
+            modal.remove();
+            menu = document.querySelector('.topbar_menu').cloneNode(true);
+        }, { once: true });
+    }
+
     btn_burger.addEventListener('click', e => {
         e.stopPropagation();
 
         if (modal.classList.contains('menu_full_window')) {
-            document.documentElement.style.overflow = 'visible';
-            modal.classList.remove('menu_full_window');
-            btn_burger.classList.remove('topbar_open');
-            modal.remove();
-            menu.remove();
+            closeMenu();
         } else {
             document.documentElement.style.overflow = 'hidden';
             modal.classList.add('menu_full_window');
@@ -27,16 +36,10 @@ export function menuStart()
     });
 
     body.addEventListener('click', e => {
-        document.documentElement.style.overflow = 'visible';
-        modal.classList.remove('menu_full_window');
-        btn_burger.classList.remove('topbar_open');
-        modal.remove();
-        menu.remove();
+        closeMenu();
     });
 
     window.addEventListener('resize', e => {
-        btn_burger.classList.remove('topbar_open');
-        modal.remove();
-        menu.remove();
+        closeMenu();
     });
 }

@@ -17,9 +17,10 @@ class AdminReturnTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/admin/returned');
-        $client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Vols de retours (11)');
+        $client->request('GET', '/admin/returned');
+        $crawler = $client->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Vols de retours');
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     } 
 
     public function testAdminReturnNew()

@@ -7,8 +7,8 @@
 
 {% block adminContent %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/calendar.png')}}"></img>
-        <h1>Réservations ({{ reservations.totalItemCount }})</h1>
+    <i class="fa-solid fa-ticket ico_fa"></i>
+        <h1>Réservations <span class="count_badge">{{ reservations.totalItemCount }}</span></h1>
     </div>
 <table>
     <thead>

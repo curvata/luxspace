@@ -64,7 +64,7 @@ class ContactType extends AbstractType
                 [
                 'label' => 'Envoyer',
                 'attr' => [
-                    'class' => 'btn_secondary full'
+                    'class' => 'btn_primary btn_cta full'
                 ]
                 ]
             );

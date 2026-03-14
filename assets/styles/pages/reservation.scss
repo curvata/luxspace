@@ -1,125 +1,249 @@
 @use "../app.scss";
 
+.card_route {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+
+    &__city {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        color: var(--text-light);
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    &__sep {
+        color: var(--text-light);
+        font-size: 0.7rem;
+        flex-shrink: 0;
+    }
+}
+
 .passengers {
+    margin-top: 2rem;
+
     .passenger {
-        margin: 1rem;
+        margin: 0.6rem;
     }
 
     form {
         .fields {
             display: flex;
             flex-wrap: wrap;
+            gap: 1rem;
+
             .passenger {
+                @extend .border_shadow_white;
+                padding: 1.2rem;
+                flex: 1;
+                min-width: 220px;
+                max-width: 280px;
+
                 .ico {
+                    margin-bottom: 0.8rem;
+
                     img {
                         max-height: 1rem;
                         max-width: 1rem;
                     }
+
+                    h3 {
+                        font-size: 0.8rem;
+                        letter-spacing: 0.08em;
+                        text-transform: uppercase;
+                        color: var(--gold);
+                    }
                 }
-                h3 {
-                    font-size: 1rem
-                }
-                @extend .border_shadow_white;
-                padding: 1rem;
-                max-width: 241px;
             }
-        } 
-        .bottom {
-            margin-left: auto;
-            margin-right: auto;
-            width: calc(60% - 1rem);
+        }
+
+        .flex_between {
             margin-top: 2rem;
-        }             
+        }
     }
 }
 
-.flights {     
+.flights {
     display: flex;
+    flex-direction: row;
     width: 100%;
+    gap: 1.5rem;
 
     .flight {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        flex: 1;
+        min-width: 0;
+
         .card {
-            max-width: 800px;
-            &_title {
-                text-align: center;
-                font-size: 1rem;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            border-radius: var(--br-lg);
+            overflow: hidden;
+
+            &_image {
+                height: 160px;
             }
+
+            &_title {
+                padding: 0.8rem 1rem;
+                background-color: var(--bg-surface-2);
+                border-bottom: 1px solid var(--border);
+            }
+
+
             &_content {
-                margin: 1rem;
-                tr {
-                    &:hover {
-                        background-origin: initial;
-                    }
-                    td {
-                        &:nth-child(1) {
-                            font-size: 1.3rem;
-                            font-weight: bold;
+                padding: 1rem;
+
+                table {
+                    border: none;
+
+                    tr {
+                        background: transparent !important;
+                        border-bottom: 1px solid var(--border);
+
+                        &:last-child {
+                            border-bottom: none;
                         }
-                        &:nth-child(2) {
-                            font-size: 1.2rem;
-                            font-weight: 500;
+
+                        &:hover {
+                            background: transparent !important;
+                        }
+
+                        td {
+                            text-align: left !important;
+                            padding: 0.7rem 0.5rem;
+                            font-size: 0.9rem;
+
+                            &:nth-child(1) {
+                                font-size: 0.78rem;
+                                font-weight: 600;
+                                letter-spacing: 0.06em;
+                                text-transform: uppercase;
+                                color: var(--text-muted);
+                                white-space: nowrap;
+                                width: 1%;
+                                padding-right: 1.5rem;
+                            }
+
+                            &:nth-child(2) {
+                                font-size: 0.95rem;
+                                font-weight: 500;
+                                color: var(--text);
+                            }
                         }
                     }
                 }
-            } 
+            }
         }
     }
 }
 
 .recap_content {
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     .flights {
-        width: 70%;
+        width: 100%;
     }
 }
 
 .summary_reservation {
-    width: 30%;
+    width: 100%;
+
     p {
-        font-size: 1rem;
-        text-align: center 
+        font-size: 0.85rem;
+        text-align: center;
+        color: var(--text-muted);
+        line-height: 1.6;
     }
+
     .item {
         @extend .border_shadow_white;
         display: flex;
         flex-direction: column;
+        gap: 1rem;
         padding: var(--padding-content);
-        margin: 0 1rem;
+
+        table {
+            border: none;
+
+            tr {
+                background: transparent !important;
+                border-bottom: 1px solid var(--border);
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    background: transparent !important;
+                }
+
+                td {
+                    text-align: left !important;
+                    padding: 0.6rem 0.4rem;
+                    font-size: 0.88rem;
+
+                    &:nth-child(1) {
+                        color: var(--text-muted);
+                        font-size: 0.78rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                        font-weight: 600;
+                        white-space: nowrap;
+                        width: 1%;
+                        padding-right: 1.5rem;
+                    }
+
+                    &:nth-child(2) {
+                        text-align: right !important;
+                        color: var(--text);
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
     }
 }
 
+/* Alignement des tableaux de détails vol — tout à gauche */
+.card_content table td,
+.summary_reservation table td {
+    text-align: left !important;
+}
+
 @media screen and (max-width: 1050px) {
-    
     .passengers {
-        .passenger {
-            min-width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-        }
-    } 
-    .flights {
-        flex-direction: column;
-        .flight {        
-            .card {
-                max-width: 1050px;
-                margin-left: 0;
-                margin-right: 0;
+        form {
+            .fields {
+                .passenger {
+                    min-width: 100%;
+                    max-width: 100%;
+                }
             }
         }
-    }  
+    }
+
+    .flights {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .recap_content {
         flex-direction: column;
         width: 100%;
+
         .summary_reservation {
             width: 100%;
-            .item {
-                margin-left: 0;
-                margin-right: 0;
-            }
         }
+
         .flights {
             width: 100%;
         }

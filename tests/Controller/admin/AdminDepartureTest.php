@@ -18,9 +18,10 @@ class AdminDepartureTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $client->loginUser($testUser);
-        $crawler = $client->request('GET', '/admin/departure');
-        $client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Vols de départs (11)');
+        $client->request('GET', '/admin/departure');
+        $crawler = $client->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Vols de départs');
+        $this->assertEquals(1, $crawler->filter('h1 .count_badge')->count());
     } 
 
     public function testAdminDepartureNew()

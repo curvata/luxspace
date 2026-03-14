@@ -78,7 +78,7 @@ class PasswordResetTest extends WebTestCase
         $client->submit($form);
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
-        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation'.$testUser->getPasswordReset()->getToken());
+        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation/'.$testUser->getPasswordReset()->getToken());
         $this->assertResponseIsSuccessful();
         $form = $crawler->selectButton('Sauvegarder')->form([
             "password_recovery[password][first]" => '%Password1',
@@ -91,7 +91,7 @@ class PasswordResetTest extends WebTestCase
         $passwordEncoder = static::$container->get("security.password_encoder");
 
         $testUser = $userRepository->findOneByEmail('user1@user.be');
-        $this->assertSelectorTextContains('h1', 'Se connecter');
+        $this->assertSelectorTextContains('h1', 'Connexion');
         $this->assertSelectorTextContains('.alert_success', 'Votre mot de passe a bien été réinitialisé');
         $this->assertTrue($passwordEncoder->isPasswordValid($testUser, '%Password1'));
     }
@@ -109,7 +109,7 @@ class PasswordResetTest extends WebTestCase
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
         $testUser->getPasswordReset()->setToken('zpoigjnzoierjhgiozeg');
-        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation'.$testUser->getPasswordReset()->getToken());
+        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation/'.$testUser->getPasswordReset()->getToken());
         $crawler = $client->followRedirect();
         $this->assertSelectorTextContains('h1', "Réinitialiser mon mot de passe");
         $this->assertEquals(
@@ -138,7 +138,7 @@ class PasswordResetTest extends WebTestCase
         self::$container->get(DatabaseToolCollection::class)->get()->loadFixtures([AppFixtures::class]);
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user1@user.be');
-        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation'.$testUser->getPasswordReset()->getToken());
+        $crawler = $client->request('GET', '/mot-de-passe-oublie/reinitialisation/'.$testUser->getPasswordReset()->getToken());
         $client->followRedirect();
         $this->assertSelectorTextContains('h1', "Réinitialiser mon mot de passe");
         $this->assertSelectorTextContains('.alert_danger', 'Token invalide ou expiré'); 

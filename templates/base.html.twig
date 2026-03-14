@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}LUXSPACE - Réservation de vols pour l'espace{% endblock %}</title>
-        <link rel="icon" href="{{ asset('./images/favicon.ico') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('./images/logo_s.png') }}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         {% block description %}
-            <meta name="description" content="Réservez vos vols dans l'espace avec Luxspace" />
+            <meta name="description" content="Réservez vos vols dans l'espace avec LUXSPACE" />
+        {% endblock %}
+        {% block opengraph %}
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="LUXSPACE" />
+            <meta property="og:title" content="LUXSPACE — Réservation de vols pour l'espace" />
+            <meta property="og:description" content="Réservez vos vols dans l'espace avec LUXSPACE" />
+            <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}{{ asset('images/homepage/home.jpg') }}" />
+            <meta property="og:url" content="{{ app.request.uri }}" />
+            <meta name="twitter:card" content="summary_large_image" />
         {% endblock %}
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
@@ -17,51 +30,121 @@
     </head>
     <body>
         <header>
-            <div class="container">   
+            <div class="container">
                 <nav class="topbar">
-                    <a href="{{ path('home') }}"><img class="topbar_logo" src="{{ asset('./images/logo.png') }}" alt="logo de Luxspace"></img></a>
+                    <a href="{{ path('home') }}">
+                        <img class="topbar_logo" src="{{ asset('./images/logo.png') }}" alt="Logo LUXSPACE">
+                    </a>
                     <ul class="topbar_menu">
-                        <li><a class="menu_link {{ isActive('destination')? 'active' }}" href="{{ path('destination.index') }}">DESTINATIONS</a></li>
-                        <li><a class="menu_link {{ isActive('contact')? 'active' }}" href="{{ path('contact') }}">CONTACT</a></li>
+                        <li><a class="menu_link {{ isActive('destination') ? 'active' : '' }}" href="{{ path('destination.index') }}">Destinations</a></li>
+                        <li><a class="menu_link {{ isActive('contact') ? 'active' : '' }}" href="{{ path('contact') }}">Contact</a></li>
                         {% if app.user %}
-                            <li><a class="menu_link {{ isActive('compte')? 'active' }}" href="{{ path('account.index') }}">COMPTE &#10072; {{ app.user.firstname}}</a></li>
-                            <li><a class="menu_link" href="{{ path('logout') }}">DECONNEXION</a></li>
+                            <li><a class="menu_link {{ isActive('compte') ? 'active' : '' }}" href="{{ path('account.index') }}">Mon compte [{{ app.user.firstname }}]</a></li>
+                            <li><a class="menu_link btn_primary" style="margin:0;padding:0.45rem 1rem;" href="{{ path('logout') }}">Déconnexion</a></li>
                         {% else %}
-                            <li><a class="menu_link {{ isActive('connexion')? 'active' }}" href="{{ path('login') }}">CONNEXION</a></li>
+                            <li><a class="menu_link {{ isActive('connexion') ? 'active' : '' }}" href="{{ path('login') }}">Connexion</a></li>
+                            <li><a class="menu_link btn_primary" style="margin:0;padding:0.45rem 1rem;" href="{{ path('register') }}">S'inscrire</a></li>
                         {% endif %}
                     </ul>
                     <div class="topbar_btn_menu_mobile">
-                        <div></div>
-                        <div></div>
+                        <svg class="burger_star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1 L13.8 10.2 L23 12 L13.8 13.8 L12 23 L10.2 13.8 L1 12 L10.2 10.2 Z"/>
+                        </svg>
                     </div>
                 </nav>
             </div>
         </header>
+
         {% block headImage %}{% endblock %}
+
         {% block flash %}
         <div class="container">
             {% for message in app.flashes('success') %}
-                <div class="alert_success">{{message}}</div>
+                <div class="alert_success">{{ message }}</div>
             {% endfor %}
             {% for message in app.flashes('error') %}
-                <div class="alert_danger">{{message}}</div>
+                <div class="alert_danger">{{ message }}</div>
             {% endfor %}
         </div>
         {% endblock %}
+
         <div class="content">
             {% block body %}{% endblock %}
         </div>
+
         <footer>
             <div class="container">
                 <section class="content">
-                    <p><img width="100" src="{{ asset('./images/logo.png') }}"></img> &#10072; <a href="{{ path('about')}}">C'est quoi ?</a> &#10072; Développé par <a href="https://menezes.be">Menezes</a></p>
-                    <div class="social">
-                        <img src="{{ asset('./images/icons/facebook.png')}}"></img>
-                        <img src="{{ asset('./images/icons/instagram.png')}}"></img>
-                        <img src="{{ asset('./images/icons/twitter.png')}}"></img>
-                    </div>
+                    <img width="80" src="{{ asset('./images/logo.png') }}" alt="LUXSPACE">
+                    <nav class="footer_nav">
+                        <a href="{{ path('about') }}"><i class="fa-solid fa-circle-info"></i> À propos</a>
+                        <a href="https://github.com/curvata/luxspace" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </nav>
+                    <p class="footer_credit">Développé par <a href="https://cancelinha.lu" target="_blank">Cancelinha</a></p>
                 </section>
             </div>
         </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Select placeholder grisé — blanc une fois une valeur choisie dans les barres de recherche
+                document.querySelectorAll('select').forEach(function (sel) {
+                    var inSearchBar = sel.closest('.search_bar, .mini_search');
+                    function updateColor() {
+                        if (sel.value === '') {
+                            sel.style.color = 'var(--text-muted)';
+                        } else {
+                            sel.style.color = inSearchBar ? '#e8e8f2' : 'var(--text)';
+                        }
+                    }
+                    updateColor();
+                    sel.addEventListener('change', updateColor);
+                });
+
+                // Inputs date search bar — gris jusqu'à ce qu'une valeur soit saisie
+                function updateInputColor(inp) {
+                    inp.style.color = inp.value === '' ? 'var(--text-muted)' : '#e8e8f2';
+                }
+                document.querySelectorAll('.search_bar input, .mini_search input').forEach(function (inp) {
+                    updateInputColor(inp);
+                    inp.addEventListener('input',      function () { updateInputColor(inp); });
+                    inp.addEventListener('change',     function () { updateInputColor(inp); });
+                    inp.addEventListener('blur',       function () { updateInputColor(inp); });
+                    inp.addEventListener('changeDate', function () { updateInputColor(inp); });
+                    // Click sur le calendrier ferme et maj la valeur
+                    document.addEventListener('click', function () { updateInputColor(inp); });
+                });
+                // Observer pour les valeurs mises à jour par le datepicker
+                document.querySelectorAll('.search_bar input, .mini_search input').forEach(function (inp) {
+                    new MutationObserver(function () { updateInputColor(inp); })
+                        .observe(inp, { attributes: true, attributeFilter: ['value'] });
+                });
+
+                var searchForm = document.querySelector('.search_bar form, .mini_search form');
+                if (searchForm) {
+                    searchForm.addEventListener('submit', function () {
+                        var btn = document.getElementById('search-submit-btn');
+                        var label = document.getElementById('search-btn-label');
+                        var loader = document.getElementById('search-btn-loader');
+                        if (btn && label && loader) {
+                            label.style.display = 'none';
+                            loader.style.display = 'inline';
+                            btn.disabled = true;
+                        }
+                    });
+                }
+
+                document.querySelectorAll('.toast_error, .toast_success').forEach(function (toast) {
+                    setTimeout(function () {
+                        toast.classList.add('hide');
+                        setTimeout(function () { toast.remove(); }, 350);
+                    }, 4500);
+                    toast.addEventListener('click', function () {
+                        toast.classList.add('hide');
+                        setTimeout(function () { toast.remove(); }, 350);
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LUXSPACE - Tableau de bord de votre compte{% endblock %}
+{% block title %}LUXSPACE - Mon compte{% endblock %}
 {% block description %}
-    <meta name="description" content="Tableau de bord de votre compte client" />
+    <meta name="description" content="Tableau de bord de votre compte LUXSPACE" />
 {% endblock %}
 
 {% block body %}
@@ -10,36 +10,50 @@
     <main>
         {% block title_cat %}
         <div class="ico">
-            <img src="{{ asset('./images/icons/user.png')}}" alt="Icône d'un utilisateur"></img>
+            <i class="fa-solid fa-gauge-high ico_fa"></i>
             <h1>Tableau de bord</h1>
         </div>
         {% endblock %}
+
         <section class="account">
             {% block accountContent %}
-                <h2>Bonjour {{ app.user.firstname }},</h2><br>
-                <p>À partir du tableau de bord de votre compte, vous pouvez gérer vos réservations, 
-                changer votre mot de passe et les détails de votre compte.</p>
+                <h2>Bonjour {{ app.user.firstname }},</h2>
+                <p>Gérez vos réservations, votre profil et votre mot de passe depuis votre espace personnel.</p>
+
                 <div class="summary">
                     {% if nextDeparture is not null %}
                         <div class="ico">
-                            <img src="{{ asset('./images/icons/rocket.png')}}" alt="Icône d'une fusée qui décolle"></img>
-                            {% if nextDeparture.date.days == 0 %}
-                                <p>C'est le grand jour, vous décollez pour {% if  nextDeparture.reservation.departure.destination.title == "Lune" %} la {% endif %}
-                                    {{nextDeparture.reservation.departure.destination.title}}
-                                </p>
-                            {% else %}
-                                <p>
-                                    Vous décollez dans {{ nextDeparture.date.days }} jour{% if nextDeparture.date.days > 1 %}s{% endif %} 
-                                    pour {% if  nextDeparture.reservation.departure.destination.title == "Lune" %} la {% endif %}
-                                    {{nextDeparture.reservation.departure.destination.title}}
-                                </p>
-                            {% endif %}
+                            <i class="fa-solid fa-rocket ico_fa dep"></i>
+                            <p>
+                                {% if nextDeparture.date.days == 0 %}
+                                    C'est le grand jour — vous décollez pour
+                                    {% if nextDeparture.reservation.departure.destination.title == "Lune" %}la {% endif %}
+                                    <strong>{{ nextDeparture.reservation.departure.destination.title }}</strong> !
+                                {% else %}
+                                    Décollage dans <strong>{{ nextDeparture.date.days }} jour{{ nextDeparture.date.days > 1 ? 's' : '' }}</strong> vers
+                                    {% if nextDeparture.reservation.departure.destination.title == "Lune" %}la {% endif %}
+                                    <strong>{{ nextDeparture.reservation.departure.destination.title }}</strong>
+                                {% endif %}
+                            </p>
                         </div>
                     {% endif %}
-                    <div class="flex_center">
-                        <a class="btn_secondary" href="{{ path('account.profil') }}">Gérer mes cordonnées</a>
-                        <a class="btn_secondary" href="{{ path('account.profil.password') }}">Modifier mon mot de passe</a>
-                        <a class="btn_secondary" href="{{ path('account.reservations') }}">Gérer mes réservations</a>
+
+                    <div class="dashboard_cards">
+                        <a class="dashboard_card" href="{{ path('account.profil') }}">
+                            <i class="fa-solid fa-address-card"></i>
+                            <span class="dashboard_card_title">Mes coordonnées</span>
+                            <span class="dashboard_card_desc">Nom, prénom, email</span>
+                        </a>
+                        <a class="dashboard_card" href="{{ path('account.profil.password') }}">
+                            <i class="fa-solid fa-lock"></i>
+                            <span class="dashboard_card_title">Mot de passe</span>
+                            <span class="dashboard_card_desc">Modifier mon mot de passe</span>
+                        </a>
+                        <a class="dashboard_card dashboard_card--gold" href="{{ path('account.reservations') }}">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span class="dashboard_card_title">Mes réservations</span>
+                            <span class="dashboard_card_desc">Historique et détails</span>
+                        </a>
                     </div>
                 </div>
             {% endblock %}

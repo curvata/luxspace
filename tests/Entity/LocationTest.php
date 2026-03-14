@@ -207,21 +207,7 @@ class LocationTest extends KernelTestCase
         $location = $this->getEntity();
         $location->setDescription('');
         $this->assertStringContainsString(
-            "La description doit comporter au moins 50 caractères",
-            implode(', ', $this->getErrors($location)));
-        
-        // Min 50
-        $location = $this->getEntity();
-        $location->setDescription($this->getText(49));
-        $this->assertStringContainsString(
-            "La description doit comporter au moins 50 caractères",
-            implode(', ', $this->getErrors($location)));
-        
-        // Max 950
-        $location = $this->getEntity();
-        $location->setDescription($this->getText(951));
-        $this->assertStringContainsString(
-            "La description ne peut pas comporter plus de 950 caractères",
+            "Merci de renseigner la description",
             implode(', ', $this->getErrors($location)));
     }
 }

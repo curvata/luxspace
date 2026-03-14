@@ -24,7 +24,7 @@ class Passenger
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank(message: "Merci de renseigner votre nom")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "Le nom ne peut contenir que des lettres, des tirets et des espaces")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "Le nom ne peut contenir que des lettres, des tirets et des espaces")]
     #[Assert\Length(
         min: 5,
         max: 30,
@@ -37,7 +37,7 @@ class Passenger
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank(message: "Merci de renseigner votre prénom")]
-    #[Assert\Regex('/^[a-zA-Z\-\s]+$/', message: "Le prénom ne peut contenir que des lettres, des tirets et des espaces")]
+    #[Assert\Regex('/^[\pL\-\s]+$/u', message: "Le prénom ne peut contenir que des lettres, des tirets et des espaces")]
     #[Assert\Length(
         min: 3,
         max: 20,

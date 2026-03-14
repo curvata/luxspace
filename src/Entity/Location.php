@@ -52,12 +52,6 @@ class Location
      * @ORM\Column(type="text")
      */
     #[Assert\NotBlank(message: "Merci de renseigner la description")]
-    #[Assert\Length(
-        min: 50,
-        max: 950,
-        minMessage: "La description doit comporter au moins {{ limit }} caractères",
-        maxMessage: "La description ne peut pas comporter plus de {{ limit }} caractères"
-    )]
     private string $description;
 
     /**

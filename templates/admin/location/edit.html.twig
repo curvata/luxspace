@@ -5,6 +5,7 @@
     <meta name="description" content="Modifier la destination {{ location.title }}" />
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('pictureLocation') }}
 {% endblock %}
 

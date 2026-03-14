@@ -1,94 +1,138 @@
 header {
-    background-color: var(--black);
+    background-color: rgba(6, 6, 15, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
     .topbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem;
-        position: inherit;
-        z-index: 9;
-    
+        padding: 0.9rem 0;
+
         &_logo {
-            max-width: 250px;
+            max-width: 160px;
+            opacity: 0.95;
+            transition: var(--transition);
+
+            &:hover {
+                opacity: 1;
+            }
         }
-      
+
         &_menu {
             display: flex;
+            align-items: center;
+            gap: 0.3rem;
             z-index: 9;
-
-            li {
-               margin-left: 1rem;
-            }
         }
-    
+
         &_btn_menu_mobile {
             display: none;
-            width: 40px;
-            height: 40px;
-        
-            div {
-                width: 100%;
-                height: 5px;
-                transition: all 0.5s ease-in-out;
-                margin-top: 6px;
-                background-color: white; 
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+
+            .burger_star {
+                width: 28px;
+                height: 28px;
+                color: var(--text-light);
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                            color 0.3s ease,
+                            filter 0.3s ease;
+
+                &:hover {
+                    color: var(--gold);
+                    filter: drop-shadow(0 0 6px rgba(212, 168, 67, 0.6));
+                }
             }
-        }
-    
-        &_open {
-            position:relative;
-            z-index: 10;
-        
-            div:nth-child(1) {
-                transform: translateY(100%) rotate(45deg);
-            }
-        
-            div:nth-child(2) {
-                transform: translateY(-100%) rotate(-45deg);
+
+            &.topbar_open {
+                .burger_star {
+                    color: var(--gold);
+                    transform: rotate(135deg);
+                    filter: drop-shadow(0 0 8px rgba(212, 168, 67, 0.6));
+                }
             }
         }
     }
+}
+
+/* Override for home page – transparent header over hero */
+.home-header {
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    position: absolute;
+    width: 100%;
 }
 
 .menu_link {
-    font-size: 1.2rem;
-    color: white;
-
-    &::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 4px;
-        background: white;
-        transition: width .5s;
-    }
-
-    &:hover::after {
-        width: 100%;
-    }
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--br-sm);
+    transition: var(--transition-fast);
+    position: relative;
 
     &:hover {
-        color: white;
+        color: var(--text);
+        background-color: rgba(255, 255, 255, 0.06);
     }
 }
 
-.active::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 4px;
-    background: white;
-    transition: width .5s;
+.active {
+    color: var(--gold) !important;
+    background-color: rgba(212, 168, 67, 0.08) !important;
 }
 
 .menu_full_window {
-    position: absolute;
-    top:0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(6, 6, 15, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    z-index: 99;
+    animation: menuOverlayIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    &.menu_closing {
+        animation: menuOverlayOut 0.25s ease-in forwards;
+
+        .mobile li { opacity: 0; }
+    }
+
+    .mobile li {
+        opacity: 0;
+        animation: menuItemIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+        @for $i from 1 through 8 {
+            &:nth-child(#{$i}) { animation-delay: #{0.08 + $i * 0.06}s; }
+        }
+    }
+}
+
+@keyframes menuOverlayIn {
+    from { opacity: 0; transform: scale(1.03); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes menuOverlayOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.97); }
+}
+
+@keyframes menuItemIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 @media screen and (max-width: 900px) {
@@ -97,40 +141,39 @@ header {
             &_menu {
                 display: none;
             }
+
             &_btn_menu_mobile {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                cursor: pointer;
             }
         }
     }
 
     .menu_full_window {
         .mobile {
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            gap: 2.4rem;
 
             li {
-                margin-left: 1rem;
                 .menu_link {
-                    font-size: 2rem;
-                    color: white;
+                    font-size: 1.4rem;
+                    letter-spacing: 0.12em;
+                    padding: 1rem 2.4rem;
                 }
             }
         }
     }
 }
 
+
 @media screen and (max-width: 700px) {
     header {
         .topbar {
             &_logo {
-                max-width: 180px;
+                max-width: 130px;
             }
         }
     }

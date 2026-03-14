@@ -18,7 +18,7 @@ class LoginTest extends WebTestCase
         $this->assertEquals(
             3,
             $crawler->filter('input')->count());
-        $this->assertSelectorTextContains('h1', "Se connecter");
+        $this->assertSelectorTextContains('h1', "Connexion");
     }
 
     public function testLoginUserOnline()

@@ -18,7 +18,7 @@ class AdultValidator extends ConstraintValidator
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof Adult) {
-            throw new UnexpectedTypeException($constraint, AdultConstraint::class);
+            throw new UnexpectedTypeException($constraint, Adult::class);
         }
 
         if (null === $value || '' === $value) {

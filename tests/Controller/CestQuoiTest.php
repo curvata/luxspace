@@ -11,6 +11,6 @@ class CestQuoiTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/a-propos');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', "C'est quoi Luxspace ?");
+        $this->assertSelectorTextContains('h1', "Qu'est-ce que LUXSPACE ?");
     }
 }

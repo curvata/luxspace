@@ -7,8 +7,8 @@
 
 {% block adminContent %}
 <div class="ico">
-    <img src="{{ asset('./images/icons/location.png')}}" alt="Icône d'une planète"></img>
-    <h1>Destinations ({{ locations.totalItemCount }})</h1>
+    <i class="fa-solid fa-earth-americas ico_fa"></i>
+    <h1>Destinations <span class="count_badge">{{ locations.totalItemCount }}</span></h1>
 </div>
 <table>
     <thead>
